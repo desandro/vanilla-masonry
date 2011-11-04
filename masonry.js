@@ -13,8 +13,6 @@
   	var val = elem.offsetWidth,
   	    computedStyle = getStyle( elem );
   	    
-  	console.log( computedStyle.paddingLeft )
-
   	if ( val > 0 ) {
       val += parseFloat( computedStyle.marginLeft ) || 0;
       val += parseFloat( computedStyle.marginRight ) || 0;
@@ -31,19 +29,14 @@
   	val = parseFloat( val ) || 0;
 
   	// Add padding, border, margin
-  	if ( extra ) {
-  		jQuery.each( which, function() {
-  			val += parseFloat( jQuery.css( elem, "padding" + this ) ) || 0;
-  			if ( extra !== "padding" ) {
-  				val += parseFloat( jQuery.css( elem, "border" + this + "Width" ) ) || 0;
-  			}
-  			if ( extra === "margin" ) {
-  				val += parseFloat( jQuery.css( elem, extra + this ) ) || 0;
-  			}
-  		});
-  	}
+    val += parseFloat( computedStyle.paddingLeft ) || 0;
+    val += parseFloat( computedStyle.paddingRight ) || 0;
+    val += parseFloat( computedStyle.borderLeftWidth ) || 0;
+    val += parseFloat( computedStyle.borderRightWidth ) || 0;
+    val += parseFloat( computedStyle.marginLeft ) || 0;
+    val += parseFloat( computedStyle.marginRight ) || 0;
 
-  	return val + "px";
+    return val;
   }
   
   function getWH( elem, name, extra ) {
