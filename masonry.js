@@ -1,41 +1,58 @@
 (function( window, undefined ) {
-  
+
   var getStyle = document.defaultView && document.defaultView.getComputedStyle ?
-    function getStyle( elem ) {
+    function( elem ) {
       return document.defaultView.getComputedStyle( elem, null )
     } : 
-    function getStyle( elem ) {
+    function( elem ) {
       return elem.currentStyle;
     };
-    
-  function getOuterWidth( elem ) {
-    // Start with offset property
-    var val = elem.offsetWidth,
-        computedStyle = getStyle( elem );
 
-    if ( val <= 0 ) {
+  // refactored getWH from jQuery
+  function getWH( elem, measure, isOuter ) {
+    // Start with offset property
+    var isWidth = measure === 'width',
+        val = isWidth ? elem.offsetWidth : elem.offsetHeight,
+        dirA = isWidth ? 'Left' : 'Top',
+        dirB = isWidth ? 'Right' : 'Bottom',
+        computedStyle = getStyle( elem ),
+        paddingA = parseFloat( computedStyle[ 'padding' + dirA ] ) || 0,
+        paddingB = parseFloat( computedStyle[ 'padding' + dirB ] ) || 0,
+        marginA = parseFloat( computedStyle[ 'margin' + dirA ] ) || 0,
+        marginB = parseFloat( computedStyle[ 'margin' + dirB ] ) || 0,
+        borderA = parseFloat( computedStyle[ 'border' + dirA + 'Width' ] ) || 0,
+        borderB = parseFloat( computedStyle[ 'border' + dirB + 'Width' ] ) || 0;
+
+    if ( val > 0 ) {
+
+      if ( isOuter ) {
+        // outerWidth, outerHeight, add margin
+        val += marginA + marginB;
+      } else {
+        // like getting width() or height(), no padding or border
+        val -= paddingA + paddingB + borderA + borderB;
+      }
+
+    } else {
+
       // Fall back to computed then uncomputed css if necessary
-      val = computedStyle.width;
+      val = computedStyle[ measure ];
       if ( val < 0 || val == null ) {
-        val = elem.style.width || 0;
+        val = elem.style[ measure ] || 0;
       }
       // Normalize "", auto, and prepare for extra
       val = parseFloat( val ) || 0;
 
-      // Add padding, border, margin
-      val += parseFloat( computedStyle.paddingLeft ) || 0;
-      val += parseFloat( computedStyle.paddingRight ) || 0;
-      val += parseFloat( computedStyle.borderLeftWidth ) || 0;
-      val += parseFloat( computedStyle.borderRightWidth ) || 0;
+      if ( isOuter ) {
+        // Add padding, border, margin
+        val += paddingA + paddingB + marginA + marginB + borderA + borderB;
+      }
     }
-
-    val += parseFloat( computedStyle.marginLeft ) || 0;
-    val += parseFloat( computedStyle.marginRight ) || 0;
 
     return val;
   }
-  
-  function getWH( elem, name, extra ) {
+
+  function getJQWH( elem, name, extra ) {
 
   	// Start with offset property
   	var val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
@@ -83,6 +100,5 @@
   }
 
   window.getWH = getWH;
-  window.getOuterWidth = getOuterWidth;
 
 })( window );
