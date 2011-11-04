@@ -13,26 +13,22 @@
     var val = elem.offsetWidth,
         computedStyle = getStyle( elem );
 
-    if ( val > 0 ) {
-      val += parseFloat( computedStyle.marginLeft ) || 0;
-      val += parseFloat( computedStyle.marginRight ) || 0;
+    if ( val <= 0 ) {
+      // Fall back to computed then uncomputed css if necessary
+      val = computedStyle.width;
+      if ( val < 0 || val == null ) {
+        val = elem.style.width || 0;
+      }
+      // Normalize "", auto, and prepare for extra
+      val = parseFloat( val ) || 0;
 
-      return val;
+      // Add padding, border, margin
+      val += parseFloat( computedStyle.paddingLeft ) || 0;
+      val += parseFloat( computedStyle.paddingRight ) || 0;
+      val += parseFloat( computedStyle.borderLeftWidth ) || 0;
+      val += parseFloat( computedStyle.borderRightWidth ) || 0;
     }
 
-    // Fall back to computed then uncomputed css if necessary
-    val = computedStyle.width;
-    if ( val < 0 || val == null ) {
-      val = elem.style.width || 0;
-    }
-    // Normalize "", auto, and prepare for extra
-    val = parseFloat( val ) || 0;
-
-    // Add padding, border, margin
-    val += parseFloat( computedStyle.paddingLeft ) || 0;
-    val += parseFloat( computedStyle.paddingRight ) || 0;
-    val += parseFloat( computedStyle.borderLeftWidth ) || 0;
-    val += parseFloat( computedStyle.borderRightWidth ) || 0;
     val += parseFloat( computedStyle.marginLeft ) || 0;
     val += parseFloat( computedStyle.marginRight ) || 0;
 
