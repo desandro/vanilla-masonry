@@ -131,11 +131,16 @@
       // console.error('Element not found for Masonry.')
       return;
     }
-    
-    this.element = elem;
-    this.options = Masonry.defaults;
 
-    for ( var prop in options ) {
+    this.element = elem;
+
+    this.options = {};
+
+    for ( var prop in Masonry.defaults ) {
+      this.options[ prop ] = Masonry.defaults[ prop ];
+    }
+
+    for ( prop in options ) {
       this.options[ prop ] = options[ prop ];
     }
 
