@@ -3,7 +3,7 @@
   var getStyle = document.defaultView && document.defaultView.getComputedStyle ?
     function( elem ) {
       return document.defaultView.getComputedStyle( elem, null )
-    } : 
+    } :
     function( elem ) {
       return elem.currentStyle;
     };
@@ -65,8 +65,8 @@
       obj.addEventListener( type, fn, false );
     else if ( obj.attachEvent ) {
       obj[ 'e' + type + fn ] = fn;
-      obj[ type + fn ] = function() { 
-        obj[ 'e' + type + fn ]( window.event ); 
+      obj[ type + fn ] = function() {
+        obj[ 'e' + type + fn ]( window.event );
       }
       obj.attachEvent( "on" + type, obj[ type + fn ] );
     }
