@@ -1,0 +1,117 @@
+---
+
+title: Options
+category: docs
+layout: default
+body_class: options
+toc :
+  - { title: animationOptions, anchor: animationoptions }
+  - { title: columnWidth, anchor: columnwidth }
+  - { title: gutterWidth, anchor: gutterwidth }
+  - { title: isAnimated, anchor: isanimated }
+  - { title: isFitWidth, anchor: isfitwidth }
+  - { title: isResizable, anchor: isresizable }
+  - { title: isRTL, anchor: isrtl }
+  - { title: itemSelector, anchor: itemselector }
+
+---
+
+<dl class="header clearfix">
+  <dt><code>option</code></dt>
+  <dd class="option-type">Type</dd>
+  <dd class="default">Default</dd>
+</dl>
+
+## animationOptions
+
+<dl class="clearfix">
+  <dt><code>animationOptions</code></dt>
+  <dd class="option-type">Object</dd>
+  <dd class="default"><code>{ queue: <span class="kc">false</span>, duration: <span class="mi">500</span> }</code></dd>
+</dl>
+
+Options used for jQuery animation. See the [jQuery API for animate options](http://api.jquery.com/animate/#animate-properties-options) for details. More details in [Animating](animating.html).
+
+## columnWidth
+
+<dl class="clearfix">
+  <dt><code>columnWidth</code></dt>
+  <dd class="option-type">Integer</dd>
+</dl>
+
+Width in pixels of 1 column of your grid. If no columnWidth is specified, Masonry uses the width of the first item element.
+
+**Recommended** if your layout has item elements that have multiple-column widths.
+
+## gutterWidth
+
+<dl class="clearfix">
+  <dt><code>gutterWidth</code></dt>
+  <dd class="option-type">Integer</dd>
+  <dd class="default"><code><span class="mi">0</span></code></dd>
+</dl>
+
+Adds additional spacing between columns.
+
+[See Demo: Gutters](../demos/gutters.html).
+
+## isAnimated
+
+<dl class="clearfix">
+  <dt><code>isAnimated</code></dt>
+  <dd class="option-type">Boolean</dd>
+  <dd class="default"><code><span class="kc">false</span></code></dd>
+</dl>
+
+Enables jQuery animation on layout changes. [See Docs: Animating](animating.html). More details in [Animating](animating.html).
+
+## isFitWidth
+
+<dl class="clearfix">
+  <dt><code>isFitWidth</code></dt>
+  <dd class="option-type">Boolean</dd>
+  <dd class="default"><code><span class="kc">false</span></code></dd>
+</dl>
+
+If enabled, Masonry will size the width of the container to the nearest column. When enabled, Masonry will measure the width of the container's parent element, not the width of the container. This option is ideal for centering Masonry layouts.
+
+[See Demo: Centered](../demos/centered.html).
+
+## isResizable
+
+<dl class="clearfix">
+  <dt><code>isResizable</code></dt>
+  <dd class="option-type">Boolean</dd>
+  <dd class="default"><code><span class="kc">true</span></code></dd>
+</dl>
+
+Triggers layout logic when browser window is resized.
+
+## isRTL
+
+<dl class="clearfix">
+  <dt><code>isRTL</code></dt>
+  <dd class="option-type">Boolean</dd>
+  <dd class="default"><code><span class="kc">false</span></code></dd>
+</dl>
+
+Enables right-to-left layout for languages like Hebrew and Arabic.
+
+[See Demo: Right-to-left](../demos/right-to-left.html).
+
+## itemSelector
+
+<dl class="clearfix">
+  <dt><code>itemSelector</code></dt>
+  <dd class="option-type">String</dd>
+</dl>
+
+Filters item elements to selector. If not set, Masonry defaults to using the child elements of the container.
+
+**Recommended** to avoid Masonry using any other hidden elements in its layout logic.
+
+{% highlight javascript %}
+
+$('#container').masonry({ itemSelector: '.box' });
+
+{% endhighlight %}

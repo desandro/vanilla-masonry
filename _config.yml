@@ -1,0 +1,5 @@
+name: Vanilla Masonry
+permalink: /:categories/:title.html
+pygments: true
+masonry_js: masonry.js
+exclude: [ minify.sh, deploy.sh ]
