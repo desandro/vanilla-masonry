@@ -206,7 +206,7 @@ $(window).resize(function(){
 <script>
   window.onload = function() {
     var facade = new Masonry( document.getElementById('container'), {
-      getFluidColumnWidth: function( containerWidth ) {
+      columnWidth: function( containerWidth ) {
         return containerWidth / 5
       }
     });

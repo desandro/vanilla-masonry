@@ -1,3 +1,11 @@
+/**
+ * Vanilla Masonry v1.0 beta
+ * A dynamic layout plugin. The flip-side of CSS Floats
+ *
+ * Licensed under the MIT license.
+ * Copyright 2011 David DeSandro
+ */
+
 (function( window, undefined ) {
 
   var getStyle = document.defaultView && document.defaultView.getComputedStyle ?
@@ -184,6 +192,8 @@
       this.offset.x = parseFloat( computedStyle['paddingRight'] ) || 0 ;
       this.element.removeChild( cursor );
 
+      this.isFluid = this.options.columnWidth && typeof this.options.columnWidth === 'function';
+
       // add masonry class first time around
       var instance = this;
       setTimeout( function() {
@@ -212,10 +222,13 @@
       var container = this.options.isFitWidth ? this.element.parentNode : this.element,
           containerWidth = getWH( container, 'width' );
 
-      this.columnWidth = this.options.columnWidth ||
-                    // or use the size of the first item
+                         // use fluid columnWidth function if there
+      this.columnWidth = this.isFluid ? this.options.columnWidth( containerWidth ) :
+                    // if not, how about the explicitly set option?
+                    this.options.columnWidth ||
+                    // Okay then, use the size of the first item
                      getWH( this.bricks[0], 'width', true ) ||
-                    // if there's no items, use size of container
+                    // Whatevs, if there's no items, use size of container
                     containerWidth;
 
       this.columnWidth += this.options.gutterWidth;
@@ -337,7 +350,7 @@
       var prevColCount = this.cols;
       // get updated colCount
       this._getColumns();
-      if ( this.cols !== prevColCount ) {
+      if ( this.isFluid || this.cols !== prevColCount ) {
         // if column count has changed, trigger new layout
         this._reLayout();
       }
