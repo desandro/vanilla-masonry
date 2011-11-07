@@ -114,4 +114,232 @@
 
   window.debounce = debounce;
 
+  // -------------------------- Masonry -------------------------- //
+
+  function Masonry( elem, options ) {
+    this.element = elem;
+    this.options = Masonry.defaults;
+
+    for ( var prop in options ) {
+      this.options[ prop ] = options[ prop ];
+    }
+
+    this._create();
+    this._init();
+  }
+
+  // styles of container element we want to keep track of
+  var masonryContainerStyles = [ 'position', 'height' ];
+
+  Masonry.defaults = {
+    isResizable: true,
+    gutterWidth: 0,
+    isRTL: false,
+    isFitWidth: false
+  };
+
+  Masonry.prototype = {
+
+    _getBricks: function( items ) {
+      var item;
+      for (var i=0, len = items.length; i < len; i++ ) {
+        item = items[i];
+        item.style.position = 'absolute';
+        item.className += ' masonry-brick';
+        this.bricks.push( item );
+      }
+    },
+
+    _create: function() {
+
+      // need to get bricks
+      this.reloadItems();
+
+      // get original styles in case we re-apply them in .destroy()
+      var elemStyle = this.element.style;
+      this._originalStyle = {};
+      for ( var i=0, len = masonryContainerStyles.length; i < len; i++ ) {
+        var prop = masonryContainerStyles[i];
+        this._originalStyle[ prop ] = elemStyle[ prop ] || '';
+      }
+
+      this.element.style.position = 'relative';
+
+      this.horizontalDirection = this.options.isRTL ? 'right' : 'left';
+      this.offset = {};
+
+      // get top left position of where the bricks should be
+      var cursor = document.createElement('div'),
+          computedStyle = getStyle( this.element ),
+          paddingX = this.options.isRTL ? 'paddingRight' : 'paddingLeft';
+
+      this.element.appendChild( cursor );
+      this.offset.y = parseFloat( computedStyle.paddingTop ) || 0;
+      // get horizontal offset
+      this.offset.x = parseFloat( computedStyle['paddingRight'] ) || 0 ;
+      this.element.removeChild( cursor );
+
+      // add masonry class first time around
+      var instance = this;
+      setTimeout( function() {
+        instance.element.className += ' masonry';
+      }, 0 );
+
+      // bind resize method
+      if ( this.options.isResizable ) {
+        addEvent( window, 'resize', debounce( function() {
+          instance.resize();
+        }));
+      }
+
+    },
+
+    // _init fires when instance is first created
+    // and when instance is triggered again -> $el.masonry();
+    _init : function( callback ) {
+      this._getColumns();
+      this._reLayout( callback );
+    },
+
+    // calculates number of columns
+    // i.e. this.columnWidth = 200
+    _getColumns : function() {
+      var container = this.options.isFitWidth ? this.element.parentNode : this.element,
+          containerWidth = getWH( container, 'width' );
+
+      this.columnWidth = this.options.columnWidth ||
+                    // or use the size of the first item
+                     getWH( this.bricks[0], 'width', true ) ||
+                    // if there's no items, use size of container
+                    containerWidth;
+
+      this.columnWidth += this.options.gutterWidth;
+
+      this.cols = Math.floor( ( containerWidth + this.options.gutterWidth ) / this.columnWidth );
+      this.cols = Math.max( this.cols, 1 );
+
+    },
+
+    // goes through all children again and gets bricks in proper order
+    reloadItems : function() {
+      this.bricks = [];
+      this._getBricks( this.element.children );
+    },
+
+    // ====================== General Layout ======================
+
+    _reLayout : function( callback ) {
+      // reset columns
+      var i = this.cols;
+      this.colYs = [];
+      while (i--) {
+        this.colYs.push( 0 );
+      }
+      // apply layout logic to all bricks
+      this.layout( this.bricks, callback );
+    },
+
+    // used on collection of atoms (should be filtered, and sorted before )
+    // accepts bricks-to-be-laid-out to start with
+    layout : function( bricks, callback ) {
+
+      // layout logic
+      var brick, colSpan, groupCount, groupY, groupColY, j, colGroup;
+
+      for ( var i=0, len = bricks.length; i < len; i++ ) {
+        brick = bricks[i];
+        //how many columns does this brick span
+        colSpan = Math.ceil( getWH( brick, 'width', true ) / this.columnWidth );
+        colSpan = Math.min( colSpan, this.cols );
+
+        if ( colSpan === 1 ) {
+          // if brick spans only one column, just like singleMode
+          colGroup = this.colYs;
+        } else {
+          // brick spans more than one column
+          // how many different places could this brick fit horizontally
+          groupCount = this.cols + 1 - colSpan;
+          colGroup = [];
+
+          // for each group potential horizontal position
+          for ( j=0; j < groupCount; j++ ) {
+            // make an array of colY values for that one group
+            groupColY = this.colYs.slice( j, j + colSpan );
+            // and get the max value of the array
+            colGroup[j] = Math.max.apply( Math, groupColY );
+          }
+
+        }
+
+        this._placeBrick( brick, colGroup );
+      }
+
+      // set the size of the container
+      var containerWidth = {};
+      this.element.style.height = ( Math.max.apply( Math, this.colYs ) - this.offset.y ) + 'px';
+      if ( this.options.isFitWidth ) {
+        var unusedCols = 0,
+            i = this.cols;
+        // count unused columns
+        while ( --i ) {
+          if ( this.colYs[i] !== this.offset.y ) {
+            break;
+          }
+          unusedCols++;
+        }
+        // fit container to columns that have been used;
+        this.element.style.width = ( (this.cols - unusedCols) * this.columnWidth -
+          this.options.gutterWidth ) + 'px';
+      }
+
+      // provide $elems as context for the callback
+      if ( callback ) {
+        callback.call( $bricks );
+      }
+
+      this.isLaidOut = true;
+    },
+
+    _placeBrick : function( brick, setY ) {
+      // get the minimum Y value from the columns
+      var minimumY = Math.min.apply( Math, setY ),
+          shortCol = 0;
+
+      // Find index of short column, the first from the left
+      for (var i=0, len = setY.length; i < len; i++) {
+        if ( setY[i] === minimumY ) {
+          shortCol = i;
+          break;
+        }
+      }
+
+      // position the brick
+      brick.style.top = ( minimumY + this.offset.y ) + 'px';
+      brick.style[ this.horizontalDirection ] = ( this.columnWidth * shortCol + this.offset.x ) + 'px';
+
+      // apply setHeight to necessary columns
+      var setHeight = minimumY + getWH( brick, 'height', true ),
+          setSpan = this.cols + 1 - len;
+      for ( i=0; i < setSpan; i++ ) {
+        this.colYs[ shortCol + i ] = setHeight;
+      }
+
+    },
+
+    // ====================== resize ======================
+
+    resize : function() {
+      var prevColCount = this.cols;
+      // get updated colCount
+      this._getColumns();
+      if ( this.cols !== prevColCount ) {
+        // if column count has changed, trigger new layout
+        this._reLayout();
+      }
+    }
+
+  };
+
+  window.Masonry = Masonry;
+
 })( window );
