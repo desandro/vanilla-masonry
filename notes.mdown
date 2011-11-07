@@ -2,6 +2,10 @@
 
 error handling
 
+appending
+
+destroying
+
 ## document
 
 getFluidColumnWidth: function( containerWidth ) {

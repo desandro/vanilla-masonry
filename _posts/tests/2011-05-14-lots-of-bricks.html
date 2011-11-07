@@ -1393,15 +1393,13 @@ layout: default
 
 <script src="../{{ site.masonry_js }}"></script>
 <script>
-  $(function(){
-    
+  window.onload = function() {
     console.time('masonry');
-    $('#container').masonry({
-      itemSelector: '.box',
-      columnWidth: 100,
-      isAnimated: true
-    }).masonry().masonry();
+    var wall = new Masonry( document.getElementById('container'), {
+      columnWidth: 100
+    });
+    wall.build();
+    wall.build();
     console.timeEnd('masonry');
-    
-  });
+  }
 </script>
