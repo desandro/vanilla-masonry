@@ -79,7 +79,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] { cursor
 
 body { 
   font: 13px 'Helvetica Neue', Arial, sans-serif;
-  background: #EDB;
+  background: #FDF8EE;
   color: #222;
   line-height: 1.6em;
 }
@@ -341,7 +341,7 @@ button {
 /**** Demos ****/
 
 #container {
-  background: #FFF;
+  background: #DCA;
   padding: 5px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -356,7 +356,7 @@ button {
 .box {
   margin: 5px;
   padding: 5px;
-  background: #EDB;
+  background: #FFF;
   font-size: 11px;
   line-height: 1.4em;
   float: left;
