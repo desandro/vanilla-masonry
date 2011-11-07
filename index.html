@@ -1,0 +1,83 @@
+---
+title: Vanilla Masonry
+layout: default
+category: homepage
+mini_bricks: 
+  - w1 h1
+  - w1 h1
+  - w1 h2
+  - w1 h1
+  - w2 h1
+  - w1 h2
+  - w1 h1
+  - w2 h2
+  - w2 h1
+  - w1 h1
+  - w2 h2
+  - w2 h1
+---
+
+
+<div id="container" class="transitions-enabled clearfix">
+  
+  <div class="item big-text col2">
+    A dynamic layout plugin for jQuery<br />
+    The flip-side of CSS floats<br />
+    <br />
+    &larr; View docs and demos
+  </div>
+  
+  <div class="item big-text">
+    Before: CSS Floats
+    <div class="mini">
+      {% for brick in page.mini_bricks %}
+        <div class="{{ brick }}">{{ forloop.index }}</div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div class="item big-text">
+    After: Masonry
+    <div id="mini-container" class="mini">
+      {% for brick in page.mini_bricks %}
+        <div class="{{ brick }}">{{ forloop.index }}</div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div class="item link">
+    <a href="jquery.masonry.min.js">Download the script jquery.&#8203;masonry.&#8203;min.js</a>
+  </div>
+  
+  <div class="item link">
+    <a href="http://meta.metafizzy.co/files/masonry-site.zip">Download this project</a>
+  </div>
+  
+  <div class="item link">
+    <a href="https://github.com/desandro/masonry">Masonry on GitHub</a>
+  </div>
+  
+  <!-- <div class="item big-text loading">
+    <img src="http://i.imgur.com/6RMhx.gif" />
+    Loading Examples
+  </div> -->
+  
+</div> <!-- #container -->
+
+<script src="{{ site.jquery_js }}"></script>
+<script src="{{ site.masonry_js }}"></script>
+<script>
+  window.onload = function() {
+    
+    var miniWall = new Masonry( document.getElementById('mini-container'), {
+      columnWidth: 50,
+      foo: 'bar'
+    });
+    
+    var wall = new Masonry( document.getElementById('container'), {
+      columnWidth: 240
+    });
+    
+  };
+
+</script>
