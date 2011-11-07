@@ -184,15 +184,12 @@
       this.offset = {};
 
       // get top left position of where the bricks should be
-      var cursor = document.createElement('div'),
-          computedStyle = getStyle( this.element ),
+      var computedStyle = getStyle( this.element ),
           paddingX = this.options.isRTL ? 'paddingRight' : 'paddingLeft';
 
-      this.element.appendChild( cursor );
       this.offset.y = parseFloat( computedStyle.paddingTop ) || 0;
       // get horizontal offset
       this.offset.x = parseFloat( computedStyle[ paddingX ] ) || 0 ;
-      this.element.removeChild( cursor );
 
       this.isFluid = this.options.columnWidth && typeof this.options.columnWidth === 'function';
 
@@ -296,13 +293,13 @@
 
       // set the size of the container
       var containerWidth = {};
-      this.element.style.height = ( Math.max.apply( Math, this.colYs ) - this.offset.y ) + 'px';
+      this.element.style.height = Math.max.apply( Math, this.colYs ) + 'px';
       if ( this.options.isFitWidth ) {
         var unusedCols = 0;
         i = this.cols;
         // count unused columns
         while ( --i ) {
-          if ( this.colYs[i] !== this.offset.y ) {
+          if ( this.colYs[i] !== 0 ) {
             break;
           }
           unusedCols++;
@@ -326,7 +323,7 @@
           shortCol = 0;
 
       // Find index of short column, the first from the left
-      for (var i=0, len = setY.length; i < len; i++) {
+      for ( var i=0, len = setY.length; i < len; i++ ) {
         if ( setY[i] === minimumY ) {
           shortCol = i;
           break;
