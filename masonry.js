@@ -117,6 +117,11 @@
   // -------------------------- Masonry -------------------------- //
 
   function Masonry( elem, options ) {
+    if ( !elem ) {
+      // console.error('Element not found for Masonry.')
+      return;
+    }
+    
     this.element = elem;
     this.options = Masonry.defaults;
 
