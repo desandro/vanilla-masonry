@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>resize</title>
+
+  <style media="screen">
+    
+  </style>
+
+</head>
+<body>
+
+  <h1>resize</h1>
+  
+  <script src="masonry.js"></script>
+  
+  <script>
+    addEvent( window, 'load', function(){
+      
+      var i = 0;
+      
+      function handleResize() {
+        console.log( i++ );
+      }
+      
+      var debouncedHandleResize = debounce( handleResize );
+      
+      addEvent( window, 'resize', debouncedHandleResize );
+      
+    });
+  </script>
+
+</body>
+</html>
