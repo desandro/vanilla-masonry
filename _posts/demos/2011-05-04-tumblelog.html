@@ -205,18 +205,11 @@ $tumblelog.imagesLoaded( function(){
 
 </div> <!-- /#tumblelog -->
 
-<script src="../{{ site.jquery_js }}"></script>
 <script src="../{{ site.masonry_js }}"></script>
 <script>
-  $(function(){
-
-    var $tumblelog = $('#tumblelog');
-  
-    $tumblelog.imagesLoaded( function(){
-      $tumblelog.masonry({
-        columnWidth: 240
-      });
+  window.onload = function() {
+    var facade = new Masonry( document.getElementById('tumblelog'), {
+      columnWidth: 240
     });
-  
-  });
+  };
 </script>
