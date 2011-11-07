@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# minifies jquery.masonry.js
+# minifies masonry.js
 # requires nodejs & uglifyjs
 
-JS=jquery.masonry.js
-JS_MIN=jquery.masonry.min.js
+JS=masonry.js
+JS_MIN=masonry.min.js
 TMP=$JS_MIN.tmp
 
 uglifyjs $JS > $TMP
