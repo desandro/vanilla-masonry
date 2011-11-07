@@ -266,7 +266,8 @@
       for ( var i=0, len = bricks.length; i < len; i++ ) {
         brick = bricks[i];
         //how many columns does this brick span
-        colSpan = Math.ceil( getWH( brick, 'width', true ) / this.columnWidth );
+        colSpan = Math.ceil( getWH( brick, 'width', true ) /
+          ( this.columnWidth + this.options.gutterWidth ) );
         colSpan = Math.min( colSpan, this.cols );
 
         if ( colSpan === 1 ) {
