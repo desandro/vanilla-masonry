@@ -201,14 +201,14 @@
 
     // _init fires when instance is first created
     // and when instance is triggered again -> $el.masonry();
-    _init : function( callback ) {
+    _init: function( callback ) {
       this._getColumns();
       this._reLayout( callback );
     },
 
     // calculates number of columns
     // i.e. this.columnWidth = 200
-    _getColumns : function() {
+    _getColumns: function() {
       var container = this.options.isFitWidth ? this.element.parentNode : this.element,
           containerWidth = getWH( container, 'width' );
 
@@ -226,14 +226,14 @@
     },
 
     // goes through all children again and gets bricks in proper order
-    reloadItems : function() {
+    reloadItems: function() {
       this.bricks = [];
       this._getBricks( this.element.children );
     },
 
     // ====================== General Layout ======================
 
-    _reLayout : function( callback ) {
+    _reLayout: function( callback ) {
       // reset columns
       var i = this.cols;
       this.colYs = [];
@@ -246,7 +246,7 @@
 
     // used on collection of atoms (should be filtered, and sorted before )
     // accepts bricks-to-be-laid-out to start with
-    layout : function( bricks, callback ) {
+    layout: function( bricks, callback ) {
 
       // layout logic
       var brick, colSpan, groupCount, groupY, groupColY, j, colGroup;
@@ -305,7 +305,7 @@
       this.isLaidOut = true;
     },
 
-    _placeBrick : function( brick, setY ) {
+    _placeBrick: function( brick, setY ) {
       // get the minimum Y value from the columns
       var minimumY = Math.min.apply( Math, setY ),
           shortCol = 0;
@@ -333,7 +333,7 @@
 
     // ====================== resize ======================
 
-    resize : function() {
+    resize: function() {
       var prevColCount = this.cols;
       // get updated colCount
       this._getColumns();
