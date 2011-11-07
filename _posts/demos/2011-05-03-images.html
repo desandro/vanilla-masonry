@@ -42,15 +42,7 @@ $container.imagesLoaded( function(){
 
 <script src="../{{ site.masonry_js }}"></script>
 <script>
-  $(function(){
-
-    var $container = $('#container');
-  
-    $container.imagesLoaded( function(){
-      $container.masonry({
-        itemSelector : '.box'
-      });
-    });
-  
-  });
+  window.onload = function() {
+    var wall = new Masonry( document.getElementById('container') );
+  };
 </script>

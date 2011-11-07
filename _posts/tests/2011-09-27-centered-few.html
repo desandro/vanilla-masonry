@@ -35,14 +35,10 @@ layout: default
 
 <script src="../{{ site.masonry_js }}"></script>
 <script>
-  $(function(){
-    
-    $('#container').masonry({
-      itemSelector: '.box',
-      columnWidth: 200,
-      isAnimated: !Modernizr.csstransitions,
+  window.onload = function() {
+    var wall = new Masonry( document.getElementById('container'), {
+      columnWidth: 100,
       isFitWidth: true
     });
-    
-  });
+  }
 </script>

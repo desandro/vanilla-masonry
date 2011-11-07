@@ -199,13 +199,12 @@ layout: default
 
 <script src="../{{ site.masonry_js }}"></script>
 <script>
-  $(function(){
+  window.onload = function() {
+    var container = document.getElementById('container'),
+        wall = new Masonry( container );
     
-      $('#container').masonry({
-        itemSelector: '.box'
-      }).css({ background: 'black' });
-      
-      $('body').css({ background: 'white' });
+    container.style.background = black;
+    document.body.style.background = white;
     
-  });
+  };
 </script>
