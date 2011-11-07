@@ -270,6 +270,12 @@
 
       for ( var i=0, len = bricks.length; i < len; i++ ) {
         brick = bricks[i];
+
+        // don't try nothing on text, imlookinachu IE6-8
+        if ( brick.nodeType !== 1 ) {
+          continue;
+        }
+
         //how many columns does this brick span
         colSpan = Math.ceil( getWH( brick, 'width', true ) /
           ( this.columnWidth + this.options.gutterWidth ) );
