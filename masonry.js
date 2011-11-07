@@ -8,9 +8,11 @@
 
 (function( window, undefined ) {
 
+  'use strict';
+
   var getStyle = document.defaultView && document.defaultView.getComputedStyle ?
     function( elem ) {
-      return document.defaultView.getComputedStyle( elem, null )
+      return document.defaultView.getComputedStyle( elem, null );
     } :
     function( elem ) {
       return elem.currentStyle;
@@ -69,21 +71,21 @@
   // by John Resig - http://ejohn.org/projects/flexible-javascript-events/
 
   function addEvent( obj, type, fn ) {
-    if ( obj.addEventListener )
+    if ( obj.addEventListener ) {
       obj.addEventListener( type, fn, false );
-    else if ( obj.attachEvent ) {
+    } else if ( obj.attachEvent ) {
       obj[ 'e' + type + fn ] = fn;
       obj[ type + fn ] = function() {
         obj[ 'e' + type + fn ]( window.event );
-      }
+      };
       obj.attachEvent( "on" + type, obj[ type + fn ] );
     }
   }
 
   function removeEvent( obj, type, fn ) {
-    if ( obj.removeEventListener )
+    if ( obj.removeEventListener ) {
       obj.removeEventListener( type, fn, false );
-    else if ( obj.detachEvent ) {
+    } else if ( obj.detachEvent ) {
       obj.detachEvent( "on" + type, obj[ type + fn ] );
       obj[ type + fn ] = null;
       obj[ 'e' + type + fn ] = null;
@@ -107,7 +109,7 @@
           func.apply( obj, args );
         }
         timeout = null;
-      };
+      }
 
       if ( timeout ) {
         clearTimeout( timeout );
@@ -189,7 +191,7 @@
       this.element.appendChild( cursor );
       this.offset.y = parseFloat( computedStyle.paddingTop ) || 0;
       // get horizontal offset
-      this.offset.x = parseFloat( computedStyle['paddingRight'] ) || 0 ;
+      this.offset.x = parseFloat( computedStyle[ paddingX ] ) || 0 ;
       this.element.removeChild( cursor );
 
       this.isFluid = this.options.columnWidth && typeof this.options.columnWidth === 'function';
@@ -296,8 +298,8 @@
       var containerWidth = {};
       this.element.style.height = ( Math.max.apply( Math, this.colYs ) - this.offset.y ) + 'px';
       if ( this.options.isFitWidth ) {
-        var unusedCols = 0,
-            i = this.cols;
+        var unusedCols = 0;
+        i = this.cols;
         // count unused columns
         while ( --i ) {
           if ( this.colYs[i] !== this.offset.y ) {
