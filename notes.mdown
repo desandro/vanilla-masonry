@@ -8,6 +8,8 @@ getFluidColumnWidth: function( containerWidth ) {
   return ( containerWidth - 20 ) / 5
 }
 
+build method
+
 ## back port to jQuery Masonry
 
 add + this.options.gutterWidth when determining column span

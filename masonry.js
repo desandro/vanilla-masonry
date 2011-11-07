@@ -130,7 +130,7 @@
     }
 
     this._create();
-    this._init();
+    this.build();
   }
 
   // styles of container element we want to keep track of
@@ -199,9 +199,9 @@
 
     },
 
-    // _init fires when instance is first created
-    // and when instance is triggered again -> $el.masonry();
-    _init: function( callback ) {
+    // trigger fires when instance is first created
+    // and when instance is triggered again -> myMasonry.build();
+    build: function( callback ) {
       this._getColumns();
       this._reLayout( callback );
     },
@@ -297,9 +297,9 @@
           this.options.gutterWidth ) + 'px';
       }
 
-      // provide $elems as context for the callback
+      // provide bricks as context for the callback
       if ( callback ) {
-        callback.call( $bricks );
+        callback.call( bricks );
       }
 
       this.isLaidOut = true;
