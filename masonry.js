@@ -365,6 +365,40 @@
         // if column count has changed, trigger new layout
         this._reLayout();
       }
+    },
+
+    // ====================== methods ======================
+
+    // for prepending
+    reload: function( callback ) {
+      this.reloadItems();
+      this.build( callback );
+    },
+
+    // convienence method for working with Infinite Scroll
+    appended: function( items, isAnimatedFromBottom, callback ) {
+      var instance = this,
+          layoutAppendedItems = function() {
+            instance._appended( items, callback );
+          };
+
+      if ( isAnimatedFromBottom ) {
+        // set new stuff to the bottom
+        var y = getWH( this.element, 'height' ) + 'px';
+        for (var i=0, len = items.length; i < len; i++) {
+          items[i].style.top = y;
+        }
+        // layout items async after initial height has been set
+        setTimeout( layoutAppendedItems, 1 );
+      } else {
+        layoutAppendedItems()
+      }
+    },
+
+    _appended: function( items, callback ) {
+      // add new bricks to brick pool
+      this._getBricks( items );
+      this.layout( items, callback );
     }
 
   };

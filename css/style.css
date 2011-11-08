@@ -48,6 +48,10 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 q { quotes: none; }
 q:before, q:after { content: ""; content: none; }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+}
+
 /* =============================================================================
    Lists
    ========================================================================== */
@@ -77,10 +81,14 @@ button, input { line-height: normal; }
 
 button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
 
+/* =============================================================================
+   Let's start it
+   ========================================================================== */
+
 body { 
   font: 13px 'Helvetica Neue', Arial, sans-serif;
   background: #FDF8EE;
-  color: #222;
+  color: #333;
   line-height: 1.6em;
 }
 
@@ -91,7 +99,7 @@ a {
 }
 
 a:hover {
-  color: #D26;
+  color: #D31;
 }
 
 a:active {
@@ -138,7 +146,7 @@ strong { font-weight: bold; }
   padding-top: 10px;
 }
 
-#site-nav h1 a { color: #D26; }
+#site-nav h1 a { color: #D31; }
 #site-nav h1 a:hover { color: #A2C; }
 
 #site-nav h2 {
@@ -165,11 +173,11 @@ strong { font-weight: bold; }
 }
 
 #site-nav li.current {
-  background: #DCA;
+  background: #D31;
 }
 
 #site-nav li.current a { color: white; }
-#site-nav li.current a:hover { color: #D26; }
+#site-nav li.current a:hover { color: #222; }
 
 #site-nav li ul { 
   margin-bottom: 0;
@@ -190,7 +198,7 @@ strong { font-weight: bold; }
 }
 
 #site-nav li.selected li a:hover {
-  color: #D26;
+  color: #D31;
 }
 
 /**** Content ****/
@@ -297,12 +305,12 @@ button {
 }
 
 .docs #content h2 {
-  border-top: 2px solid #FFF;
+  border-top: 2px solid #DCA;
   padding-top: 10px;
 }
 
 .docs #content h2:target { 
-  background: #D26;
+  background: #D31;
   color: white;
   padding: 10px 5px 5px;
 }
@@ -490,7 +498,7 @@ button {
   display: block;
   padding: 10px;
   width: 200px;
-  background: #D26;
+  background: #D31;
   color: white;
   -webkit-border-radius: 5px;
      -moz-border-radius: 5px;
@@ -519,7 +527,7 @@ button {
 }
 
 .homepage .example a:hover { 
-  background: #D26;
+  background: #D31;
   color: white;
 }
 
