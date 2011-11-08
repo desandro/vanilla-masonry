@@ -116,32 +116,6 @@
     }
   }
 
-  // -------------------------- debounce -------------------------- //
-
-  // by John Hann - http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
-
-  function debounce( func, threshold, execAsap ) {
-    var timeout;
-
-    return function debounced() {
-      var obj = this, args = arguments;
-      function delayed () {
-        if ( !execAsap ) {
-          func.apply( obj, args );
-        }
-        timeout = null;
-      }
-
-      if ( timeout ) {
-        clearTimeout( timeout );
-      } else if ( execAsap ) {
-        func.apply( obj, args );
-      }
-
-      timeout = setTimeout(delayed, threshold || 100);
-    };
-
-  }
 
   // -------------------------- Masonry -------------------------- //
 
@@ -225,10 +199,9 @@
 
       // bind resize method
       if ( this.options.isResizable ) {
-        this.resizeHandler = debounce( function() {
-          instance.resize();
+        addEvent( window, 'resize', function(){
+          instance._handleResize();
         });
-        addEvent( window, 'resize', this.resizeHandler );
       }
 
     },
@@ -377,6 +350,26 @@
 
     // ====================== resize ======================
 
+    // original debounce by John Hann
+    // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+
+    // this fires every resize
+    _handleResize: function() {
+      var instance = this;
+
+      function delayed() {
+        instance.resize();
+        instance._resizeTimeout = null;
+      }
+
+      if ( this._resizeTimeout ) {
+        clearTimeout( this._resizeTimeout );
+      }
+
+      this._resizeTimeout = setTimeout( delayed, 100 );
+    },
+
+    // debounced
     resize: function() {
       var prevColCount = this.cols;
       // get updated colCount
