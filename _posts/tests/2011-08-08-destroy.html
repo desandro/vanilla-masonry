@@ -190,20 +190,18 @@ layout: default
 
 <script src="../{{ site.masonry_js }}"></script>
 <script>
-  $(function(){
+  window.onload = function() {
+    var container = document.getElementById('container'),
+        wall;
     
-    var $container = $('#container');
-    
-    $('#init').click(function(){
-      $container.masonry({
-        itemSelector: '.box',
+    document.getElementById('init').onclick = function() {
+      wall = new Masonry( container, {
         columnWidth: 100
       });
-    });
-    
-    $('#destroy').click(function(){
-      $container.masonry('destroy');
-    });
-    
-  });
+    };
+
+    document.getElementById('destroy').onclick = function() {
+      wall.destroy();
+    };
+  };
 </script>

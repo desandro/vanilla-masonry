@@ -12,7 +12,7 @@ layout: default
 
   #alpha {
     padding: 5px;
-    background: white;
+    background: #DCA;
     margin-right: 5px;
   }
   
@@ -21,10 +21,15 @@ layout: default
     background: #111;
   }
   
-  #beta .col1 { width: 100px; }
-  #beta .col2 { width: 220px; }
-  #beta .col3 { width: 340px; }
-  #beta .col4 { width: 460px; }
+  #beta .box {
+    padding: 10px;
+    border: 2px solid #D31;
+  }
+  
+  #beta .col1 { width:  86px; }
+  #beta .col2 { width: 206px; }
+  #beta .col3 { width: 326px; }
+  #beta .col4 { width: 446px; }
 </style>
 
 <p>
@@ -209,31 +214,41 @@ layout: default
 <script src="../{{ site.masonry_js }}"></script>
 <script src="../js/box-maker.js"></script>
 <script>
-  $(function(){
-    
-    var $alpha = $('#alpha'),
-        $beta = $('#beta');
-    
-    $alpha.masonry({
-      itemSelector: '.box',
+  window.onload = function() {
+    var alpha = document.getElementById('alpha'),
+        beta = document.getElementById('beta');
+  
+    var alphaWall = new Masonry( alpha, {
       columnWidth: 100
     });
-    
-    $beta.masonry({
-      itemSelector: '.box',
-      columnWidth: 120,
-      isAnimated: true
+  
+    var betaWall = new Masonry( beta, {
+      columnWidth: 120
     });
+  
+    document.getElementById('prepend-alpha').onclick = function() {
+      // get an array of elements
+      var boxes = boxMaker.makeBoxes();
+
+      // prepend box to container
+      for (var i=0, len = boxes.length; i < len; i++) {
+        alpha.insertBefore( boxes[i], alpha.firstChild )
+      }
     
-    $('#prepend-alpha').click(function(){
-      var $boxes = $( boxMaker.makeBoxes() );
-      $alpha.prepend( $boxes ).masonry( 'reload' );
-    });
+      alphaWall.reload();
+    };
+
+
+    document.getElementById('append-beta').onclick = function() {
+      // get an array of elements
+      var boxes = boxMaker.makeBoxes();
+
+      for (var i=0, len = boxes.length; i < len; i++) {
+        beta.appendChild( boxes[i] );
+      }
     
-    $('#append-beta').click(function(){
-      var $boxes = $( boxMaker.makeBoxes() );
-      $beta.append( $boxes ).masonry( 'appended', $boxes );
-    });
-    
-  });
+      betaWall.appended( boxes );
+    };
+  
+  };
 </script>
