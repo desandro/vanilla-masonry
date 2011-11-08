@@ -10,6 +10,28 @@
 
   'use strict';
 
+  // -------------------------- DOM Utility -------------------------- //
+
+  // from bonzo.js, by Dustin Diaz - https://github.com/ded/bonzo
+
+  function classReg(c) {
+    return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
+  }
+
+  function hasClass(el, c) {
+    return classReg(c).test(el.className);
+  }
+  function addClass(el, c) {
+    if ( !hasClass(el, c) ) {
+      el.className = el.className + ' ' + c;
+    }
+  }
+  function removeClass(el, c) {
+    el.className = el.className.replace(classReg(c), ' ');
+  }
+
+  // -------------------------- getStyle -------------------------- //
+
   var getStyle = document.defaultView && document.defaultView.getComputedStyle ?
     function( elem ) {
       return document.defaultView.getComputedStyle( elem, null );
@@ -165,7 +187,7 @@
       for (var i=0, len = items.length; i < len; i++ ) {
         item = items[i];
         item.style.position = 'absolute';
-        item.className += ' masonry-brick';
+        addClass( item, 'masonry-brick' );
         this.bricks.push( item );
       }
     },
@@ -201,14 +223,15 @@
       // add masonry class first time around
       var instance = this;
       setTimeout( function() {
-        instance.element.className += ' masonry';
+        addClass( instance.element, 'masonry' );
       }, 0 );
 
       // bind resize method
       if ( this.options.isResizable ) {
-        addEvent( window, 'resize', debounce( function() {
+        this.resizeHandler = debounce( function() {
           instance.resize();
-        }));
+        });
+        addEvent( window, 'resize', this.resizeHandler );
       }
 
     },
@@ -399,6 +422,32 @@
       // add new bricks to brick pool
       this._getBricks( items );
       this.layout( items, callback );
+    },
+
+    destroy: function() {
+      var brick;
+      for (var i=0, len = this.bricks.length; i < len; i++) {
+        brick = this.bricks[i];
+        brick.style.position = '';
+        brick.style.top = '';
+        brick.style.left = '';
+        removeClass( brick, 'masonry-brick' )
+      }
+
+      // re-apply saved container styles
+      var elemStyle = this.element.style;
+      len = masonryContainerStyles.length;
+      for ( i=0; i < len; i++ ) {
+        var prop = masonryContainerStyles[i];
+        elemStyle[ prop ] = this._originalStyle[ prop ];
+      }
+
+      removeClass( this.element, 'masonry' );
+
+      if ( this.resizeHandler ) {
+        removeEvent( window, 'resize', this.resizeHandler );
+      }
+
     }
 
   };
