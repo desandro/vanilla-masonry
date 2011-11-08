@@ -32,9 +32,11 @@
 
   // -------------------------- getStyle -------------------------- //
 
-  var getStyle = document.defaultView && document.defaultView.getComputedStyle ?
+  var defView = document.defaultView;
+
+  var getStyle = defView && defView.getComputedStyle ?
     function( elem ) {
-      return document.defaultView.getComputedStyle( elem, null );
+      return defView.getComputedStyle( elem, null );
     } :
     function( elem ) {
       return elem.currentStyle;
@@ -114,9 +116,6 @@
     }
   }
 
-  window.addEvent = addEvent;
-  window.removeEvent = removeEvent;
-
   // -------------------------- debounce -------------------------- //
 
   // by John Hann - http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
@@ -143,8 +142,6 @@
     };
 
   }
-
-  window.debounce = debounce;
 
   // -------------------------- Masonry -------------------------- //
 
@@ -431,7 +428,7 @@
         brick.style.position = '';
         brick.style.top = '';
         brick.style.left = '';
-        removeClass( brick, 'masonry-brick' )
+        removeClass( brick, 'masonry-brick' );
       }
 
       // re-apply saved container styles
