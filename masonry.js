@@ -181,13 +181,12 @@
       this.horizontalDirection = this.options.isRTL ? 'right' : 'left';
       this.offset = {};
 
-      // get top left position of where the bricks should be
+      // get top left/right position of where the bricks should be
       var computedStyle = getStyle( this.element ),
           paddingX = this.options.isRTL ? 'paddingRight' : 'paddingLeft';
 
       this.offset.y = parseFloat( computedStyle.paddingTop ) || 0;
-      // get horizontal offset
-      this.offset.x = parseFloat( computedStyle[ paddingX ] ) || 0 ;
+      this.offset.x = parseFloat( computedStyle[ paddingX ] ) || 0;
 
       this.isFluid = this.options.columnWidth && typeof this.options.columnWidth === 'function';
 
@@ -195,7 +194,7 @@
       var instance = this;
       setTimeout( function() {
         addClass( instance.element, 'masonry' );
-      }, 0 );
+      });
 
       // bind resize method
       if ( this.options.isResizable ) {
@@ -319,7 +318,6 @@
         callback.call( bricks );
       }
 
-      this.isLaidOut = true;
     },
 
     _placeBrick: function( brick, setY ) {
