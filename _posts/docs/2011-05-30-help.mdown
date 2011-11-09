@@ -19,7 +19,7 @@ jQuery Masonry is a fairly popular plugin. Chances are your issue has already be
 
 ## Reporting bugs and issues
 
-[Report bugs and issues on GitHub](http://github.com/desandro/masonry/issues). 
+[Report bugs and issues on GitHub](http://github.com/desandro/vanilla-masonry/issues).
 
 ### Guidelines {: #issues-guidelines}
 

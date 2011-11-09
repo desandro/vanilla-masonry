@@ -97,7 +97,7 @@ $container.imagesLoaded(function(){
 
 ## Code repository
 
-This project lives on GitHub at [github.com/desandro/masonry](http://github.com/desandro/masonry). There you can grab the latest code and follow development.
+This project lives on GitHub at [github.com/desandro/vanilla-masonry](http://github.com/desandro/vanilla-masonry). There you can grab the latest code and follow development.
 
 ## Acknowledgments
 
