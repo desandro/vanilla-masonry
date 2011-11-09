@@ -5,6 +5,7 @@ category: docs
 layout: default
 toc:
   - { title: Getting started, anchor: getting_started }
+  - { title: CSS transitions, anchor: css_transitions }
   - { title: Code repository, anchor: code_repository }
   - { title: Acknowledgments, anchor: acknowledgments }
   - { title: Changelog, anchor: changelog }
@@ -77,6 +78,39 @@ window.onload = function() {
 That's it!
 
 [**See Demo: Basic multi-column**](../demos/basic-multi-column.html)
+
+## CSS transitions
+
+You can animate layout rearrangements on CSS3 transitions. In your CSS, add transition styles below. The Masonry plugin will add a class of `masonry` to the container after the first arrangement so transitions can be applied afterward. Item elements will have a class of `masonry-brick` added.
+
+{% highlight css %}
+/**** Transitions ****/
+
+.masonry,
+.masonry .masonry-brick {
+  -webkit-transition-duration: 0.7s;
+     -moz-transition-duration: 0.7s;
+      -ms-transition-duration: 0.7s;
+       -o-transition-duration: 0.7s;
+          transition-duration: 0.7s;
+}
+
+.masonry {
+  -webkit-transition-property: height;
+     -moz-transition-property: height;
+      -ms-transition-property: height;
+       -o-transition-property: height;
+          transition-property: height;
+}
+
+.masonry .masonry-brick {
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
+}
+{% endhighlight %}
 
 ## Code repository
 
