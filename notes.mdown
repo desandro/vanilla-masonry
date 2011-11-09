@@ -2,6 +2,8 @@
 
 error handling
 
+acknowledgments
+
 ## document
 
 getFluidColumnWidth: function( containerWidth ) {

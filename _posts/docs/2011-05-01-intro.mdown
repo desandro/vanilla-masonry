@@ -12,7 +12,7 @@ toc:
 
 ---
 
-Masonry is a dynamic grid layout plugin for jQuery. Think of it as the flip-side of CSS floats. Whereas floating arranges elements horizontally then vertically, Masonry arranges elements vertically, positioning each element in the next open spot in the grid. The result minimizes vertical gaps between elements of varying height, just like a mason fitting stones in a wall.
+Masonry is a dynamic grid layout script. Think of it as the flip-side of CSS floats. Whereas floating arranges elements horizontally then vertically, Masonry arranges elements vertically, positioning each element in the next open spot in the grid. The result minimizes vertical gaps between elements of varying height, just like a mason fitting stones in a wall.
 
 ## Getting started
 
@@ -33,12 +33,11 @@ Masonry works on a container element with a group of similar child items.
 
 {% endhighlight %}
 
-Add jQuery and the Masonry script. Masonry requires jQuery v1.4.0 and greater.
+Add the Masonry script.
 
 {% highlight html %}
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script src="/path/to/jquery.masonry.min.js"></script>
+<script src="/path/to/masonry.min.js"></script>
 
 {% endhighlight %}
 
@@ -58,17 +57,20 @@ All sizing of items is handled by your CSS. Items should be floated.
 
 ### Script
 
-It is recommended you specify an `itemSelector` and `columnWidth`. There are a number of other [options](options.html) you can specify.
+Initialize a Masonry instance with `new Masonry()`. The Masonry constructor accepts two arguments:
+
+1. The container element
+2. An options object
+
+Set `columnWidth` to set the width of columns in the layout grid. There are a number of other [options](options.html) you can specify.
 
 {% highlight javascript %}
 
-$(function(){
-  $('#container').masonry({
-    // options
-    itemSelector : '.item',
-    columnWidth : 240
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container'), {
+    columnWidth: 240
   });
-});
+};
 
 {% endhighlight %}
 
@@ -76,67 +78,24 @@ That's it!
 
 [**See Demo: Basic multi-column**](../demos/basic-multi-column.html)
 
-
-### imagesLoaded plugin
-
-If your content contains any images, you'll want to ensure that Masonry is triggered after all the images your content has loaded. The included [imagesLoaded plugin](https://github.com/desandro/imagesloaded) makes this easy.
-
-{% highlight javascript %}
-
-var $container = $('#container');
-$container.imagesLoaded(function(){
-  $container.masonry({
-    itemSelector : '.item',
-    columnWidth : 240
-  });
-});
-
-{% endhighlight %}
-
-[See Demo: Images](../demos/images.html)
-
 ## Code repository
 
 This project lives on GitHub at [github.com/desandro/vanilla-masonry](http://github.com/desandro/vanilla-masonry). There you can grab the latest code and follow development.
 
 ## Acknowledgments
 
-+ Louis-Rémi Babé and Paul Irish for the [jQuery SmartResize plugin](http://github.com/louisremi/jquery-smartresize). De-bounced window resize event handler. Used within Masonry.
-+ Paul Irish and Luke Shumard for [Infinite Scroll](http://www.infinite-scroll.com). Pretty much Masony's BFF &lt;3.
-+ The Modernizr team for [Modernizr](http://www.modernizr.com/). Used in most of these demos.
-+ Paul Irish et. al. for [imagesLoaded plugin](https://gist.github.com/268257). Used within Masonry.
-+ [Ralph Holzmann](http://twitter.com/ralphholzmann) for re-writing the [jQuery Plugins/Authoring tutorial](http://docs.jquery.com/Plugins/Authoring) and opened my eyes to [Plugin Methods](http://docs.jquery.com/Plugins/Authoring#Plugin_Methods) pattern.
-+ [Eric Hynds](http://www.erichynds.com/) for his article [Using $.widget.bridge Outside of the Widget Factory](http://www.erichynds.com/jquery/using-jquery-ui-widget-factory-bridge/) which provided the architecture for Masonry.
+
 
 ## Changelog
 
 <dl>
-  <dt>v2.0: May 2011</dt>
-    <dd>Complete re-write. Uses <code>$.Mason</code> constructor, like jQuery UI widget</dd>
-    <dd>Add options <code>gutterWidth</code>, <code>isFitWidth</code> for centering layout, <code>isRTL</code> for right-to-left layout</dd>
-    <dd>Add all new methods like <code>appended</code>, and <code>reload</code></dd>
-    <dd>Remove filtering demos</dd>
-  <dt>v1.3: 3 Sep 2010</dt>
-    <dd>Revamped <code>appendedContent</code> to work with container elements.  Plays nice with latest Infinite Scroll.</dd>
-    <dd>Revised layout for documentation to allow for more pages.</dd>
-  <dt>v1.2: 12 Jun 2010</dt>
-    <dd>Support for filtering added</dd>
-  <dt>v1.1: 29 Apr 2010</dt>
-    <dd>Add animation</dd>
-  <dt>v1.0: 7 Dec 2009</dt>
-    <dd>Multi-column width support</dd>
-  <dd>Appending elements and Infinite Scroll support</dd>
-    <dd>Less obstrusive layout. No inserting additional markup.</dd>
-    <dd>Automatically binds event to window resizing</dd>
-  <dt>v0.4: 14 Jun 2009</dt>
-    <dd>Better fluid rearrangement support</dd>
-  <dt>v0.1: Feb 2009</dt>
+  <dt>v1.0: Nov 2011</dt>
     <dd>Original release</dd>
 </dl>
 
 ## License
 
-jQuery Masonry is licensed under the MIT license. It may be used for personal and commercial applications.
+Vanilla Masonry is licensed under the MIT license. It may be used for personal and commercial applications.
 
 <div class="license-copy">
   <h3>The MIT License</h3>
