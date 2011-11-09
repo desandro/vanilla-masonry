@@ -96,11 +96,11 @@ You can animate layout rearrangements on CSS3 transitions. In your CSS, add tran
 }
 
 .masonry {
-  -webkit-transition-property: height;
-     -moz-transition-property: height;
-      -ms-transition-property: height;
-       -o-transition-property: height;
-          transition-property: height;
+  -webkit-transition-property: width, height;
+     -moz-transition-property: width, height;
+      -ms-transition-property: width, height;
+       -o-transition-property: width, height;
+          transition-property: width, height;
 }
 
 .masonry .masonry-brick {
