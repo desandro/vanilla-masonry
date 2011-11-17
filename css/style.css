@@ -115,7 +115,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] { cursor
 
 body { 
   font: 13px 'Helvetica Neue', Arial, sans-serif;
-  background: #FDF8EE;
+  background: #FDFAF8;
   color: #333;
   line-height: 1.6em;
 }
@@ -193,9 +193,7 @@ strong { font-weight: bold; }
 }
 
 #site-nav li {
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+  border-radius: 4px;
 }
 
 #site-nav li a {
@@ -280,9 +278,7 @@ p code {
 
 pre {
   padding: 10px;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 
 ul, ol { padding-left: 1.3em;}
@@ -380,14 +376,12 @@ button {
 /**** Demos ****/
 
 #container {
-  background: #DCA;
+  background: #BCE;
   padding: 5px;
   margin-bottom: 20px;
   border-radius: 5px;
   clear: both;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 
 .centered { margin: 0 auto; }
@@ -395,13 +389,11 @@ button {
 .box {
   margin: 5px;
   padding: 5px;
-  background: #FFF;
+  background: #FDFAF8;
   font-size: 11px;
   line-height: 1.4em;
   float: left;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 
 .box h2 {
@@ -475,11 +467,9 @@ button {
   float: left;
   padding: 10px;
   margin: 10px;
-  background: #FAF8E2;
+  background: #FDFAF8;
   font-weight: 300;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 
 .homepage .big-text,
@@ -498,9 +488,7 @@ button {
   width: 200px;
   background: #D31;
   color: white;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 
 .homepage .link a:hover {
@@ -546,14 +534,12 @@ button {
   float: left;
   background: #DCA;
   margin: 3px;
-  color: #FAF8E2;
+  color: #FDFAF8;
   font-weight: bold;
   font-size: 32px;
   line-height: 46px;
   text-align: center;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
+  border-radius: 3px;
 }
 
 .homepage .mini .w1 { width: 44px; }
@@ -600,9 +586,7 @@ button {
   background: #000; 
   opacity: 0.8;
   color: #FFF;
-  -webkit-border-radius: 10px;
-     -moz-border-radius: 10px;
-          border-radius: 10px;
+  border-radius: 10px;
 }
 
 /**** Fluid ****/
@@ -630,9 +614,7 @@ button {
   float: right;
   background: red;
   color: white;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 
 /**** Pygments ****/
