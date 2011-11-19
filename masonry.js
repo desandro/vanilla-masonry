@@ -292,7 +292,27 @@
 
         }
 
-        this._placeBrick( brick, colGroup );
+        // get the minimum Y value from the columns
+        var minimumY = Math.min.apply( Math, colGroup );
+
+        // Find index of short column, the first from the left
+        for ( var colI = 0, groupLen = colGroup.length; colI < groupLen; colI++ ) {
+          if ( colGroup[ colI ] === minimumY ) {
+            break;
+          }
+        }
+
+        // position the brick
+        brick.style.top = ( minimumY + this.offset.y ) + 'px';
+        brick.style[ this.horizontalDirection ] = ( this.columnWidth * colI + this.offset.x ) + 'px';
+
+        // apply setHeight to necessary columns
+        var setHeight = minimumY + getWH( brick, 'height', true ),
+            setSpan = this.cols + 1 - groupLen;
+        for ( j=0; j < setSpan; j++ ) {
+          this.colYs[ colI + j ] = setHeight;
+        }
+
       }
 
       // set the size of the container
@@ -316,30 +336,6 @@
       // provide bricks as context for the callback
       if ( callback ) {
         callback.call( bricks );
-      }
-
-    },
-
-    _placeBrick: function( brick, setY ) {
-      // get the minimum Y value from the columns
-      var minimumY = Math.min.apply( Math, setY );
-
-      // Find index of short column, the first from the left
-      for ( var colI = 0, len = setY.length; colI < len; colI++ ) {
-        if ( setY[ colI ] === minimumY ) {
-          break;
-        }
-      }
-
-      // position the brick
-      brick.style.top = ( minimumY + this.offset.y ) + 'px';
-      brick.style[ this.horizontalDirection ] = ( this.columnWidth * colI + this.offset.x ) + 'px';
-
-      // apply setHeight to necessary columns
-      var setHeight = minimumY + getWH( brick, 'height', true ),
-          setSpan = this.cols + 1 - len;
-      for ( var i=0; i < setSpan; i++ ) {
-        this.colYs[ colI + i ] = setHeight;
       }
 
     },
