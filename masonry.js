@@ -396,7 +396,7 @@
         // layout items async after initial height has been set
         setTimeout( layoutAppendedItems, 1 );
       } else {
-        layoutAppendedItems()
+        layoutAppendedItems();
       }
     },
 
