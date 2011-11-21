@@ -13,6 +13,21 @@ toc :
 
 ---
 
+Options are set with an object as the second argument to the `Masonry` constructor. All options are optional.
+
+{% highlight javascript %}
+
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container'), {
+    // options...
+    columnWidth: 240,
+    gutterWidth: 20,
+    isFitWidth: true
+  });
+};
+
+{% endhighlight %}
+
 <dl class="header clearfix">
   <dt><code>option</code></dt>
   <dd class="option-type">Type</dd>
