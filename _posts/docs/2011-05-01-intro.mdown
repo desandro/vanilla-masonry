@@ -58,7 +58,7 @@ All sizing of items is handled by your CSS. Items should be floated.
 
 ### Script
 
-Initialize a Masonry instance with `new Masonry()`. The Masonry constructor accepts two arguments:
+Initialize a Masonry instance with `new Masonry( element, options )`. The Masonry constructor accepts two arguments.
 
 1. The container element
 2. An options object
@@ -118,7 +118,12 @@ This project lives on GitHub at [github.com/desandro/vanilla-masonry](http://git
 
 ## Acknowledgments
 
+My thanks go out to following developers, whose work was integral in making Masonry lightweight and cross-browser compatible.
 
++ **John Resig** for cross-browser addEvent, removeEvent functions
++ [**Dustin Diaz**](http://dustindiaz.com/) for add/remove class function in bonzo
++ **The jQuery team** for the `getWH` helper function within jQuery
++ **John Hann** for debouncing
 
 ## Changelog
 
