@@ -205,7 +205,7 @@
 
     },
 
-    // trigger fires when instance is first created
+    // build fires when instance is first created
     // and when instance is triggered again -> myMasonry.build();
     build: function( callback ) {
       this._getColumns();

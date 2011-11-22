@@ -5,20 +5,22 @@ category: docs
 layout: default
 toc:
   - { title: appended, anchor: appended }
+  - { title: build, anchor: build }
   - { title: destroy, anchor: destroy }
   - { title: layout, anchor: layout }
-  - { title: option, anchor: option }
   - { title: reloadItems, anchor: reloaditems }
   - { title: reload, anchor: reload }
-  - { title: remove, anchor: remove }
 
 ---
 
-Masonry offers several methods to extend functionality. Masonry's methods follow the jQuery UI pattern.
+Masonry offers several methods to extend functionality. Methods are called on an Masonry instance
 
 {% highlight javascript %}
 
-$('#container').masonry( 'methodName', [optionalParameters] )
+// wall is an instance of Masonry
+var wall = new Masonry( element, options );
+// reload is a method
+wall.reload();
 
 {% endhighlight %}
 
@@ -27,56 +29,44 @@ $('#container').masonry( 'methodName', [optionalParameters] )
 
 {% highlight javascript %}
 
-.masonry( 'appended', $content, isAnimatedFromBottom )
+masonryInstance.appended( [elements], isAnimatedFromBottom );
 
 {% endhighlight %}
 
-Triggers `layout` on item elements that have been appended to the container.
+Triggers `.layout()` on an array of item elements that have been appended to the container. Setting the `isAnimatedFromBottom` argument to <code><span class="kc">true</span></code> will enable the newly appended items to be animated from the bottom, if [CSS transitions](intro.html#css_transitions) are enabled.
 
 [See Demo: Adding items](../demos/adding-items.html).
 
 {% highlight javascript %}
 
-var $boxes = $('<div class="box"/><div class="box"/><div class="box"/>');
-$('#container').append( $boxes ).masonry( 'appended', $boxes );
+var container = document.getElementById('container'),
+    item1 = document.createElement('div'),
+    item2 = document.createElement('div');
+
+var wall = new Masonry( container, { columnWidth: 100 });
+
+container.appendChild( item1 );
+container.appendChild( item2 );
+
+wall.appended( [ item1, item2 ] );
 
 {% endhighlight %}
 
-Setting the `isAnimatedFromBottom` argument to <code><span class="kc">true</span></code> will enable the newly appended items to be animated from the bottom, if animation is enabled.
+## build
 
 {% highlight javascript %}
 
-$('#container').append( $boxes ).masonry( 'appended', $boxes, true );
+masonryInstance.build();
 
 {% endhighlight %}
 
-
-The `appended` method is ideal to use Masonry with Infinite Scroll, in its callback.
-
-[See Demo: Infinite Scroll](../demos/infinite-scroll.html).
-
-{% highlight javascript %}
-
-
-var $container = $('#container');
-$container.infinitescroll({
-    // infinite scroll options...
-  },
-  // trigger Masonry as a callback
-  function( newElements ) {
-    var $newElems = $( newElements );
-    $container.masonry( 'appended', $newElems );
-  }
-);
-
-{% endhighlight %}
-
+Positions all items in the Masonry instance.
 
 ## destroy
 
 {% highlight javascript %}
 
-.masonry( 'destroy' )
+masonryInstance.destroy();
 
 {% endhighlight %}
 
@@ -86,70 +76,48 @@ Removes Masonry functionality completely. Returns element back to pre-initialize
 
 {% highlight javascript %}
 
-.masonry( 'layout', $items, callback )
+masonryInstance.layout( [elements] );
 
 {% endhighlight %}
 
-Positions specified item elements in layout.
+Positions an array of item elements in layout.
 
-`layout` will only position specified elements, and those elements will be positioned at the end of layout. Whereas `.masonry()` will position all items in the Masonry instance.
-
-## option
-
-{% highlight javascript %}
-
-.masonry( 'option', options )
-
-{% endhighlight %}
-
-Sets options for plugin instance. Unlike passing options through `.masonry()`, using the `option` method will not trigger layout.
-
-{% highlight javascript %}
-
-// set multiple options
-.masonry( 'option', { columnWidth: 120, isAnimated: false } )
-
-{% endhighlight %}
-
+`.layout()` will only position specified elements, and those elements will be positioned at the end of layout. Whereas `.build()` will position all items in the Masonry instance.
 
 ## reloadItems
 
 {% highlight javascript %}
 
-.masonry( 'reloadItems' )
+masonryInstance.reloadItems()
 
 {% endhighlight %}
 
-Re-collects all item elements in their current order in the DOM.  
+Re-collects all item elements in their current order in the DOM for the masonry instance.
 
 ## reload
 
 {% highlight javascript %}
 
-.masonry( 'reload' )
+masonryInstance.reload()
 
 {% endhighlight %}
 
-Convenience method for triggering `reloadItems` then `.masonry()`. Useful for prepending or inserting items.
+Convenience method for triggering `.reloadItems()` then `.build()`. Useful for prepending or inserting items.
 
 [See Demo: Adding items](../demos/adding-items.html).
 
 {% highlight javascript %}
 
-var $boxes = $('<div class="box"/><div class="box"/><div class="box"/>');
-$('#container').prepend( $boxes ).masonry( 'reload' );
+var container = document.getElementById('container'),
+    item1 = document.createElement('div'),
+    item2 = document.createElement('div');
+
+var wall = new Masonry( container, { columnWidth: 100 });
+
+container.insertBefore( item1, container.firstChild );
+container.insertBefore( item2, container.firstChild );
+
+wall.reload();
 
 {% endhighlight %}
-
-## remove
-
-{% highlight javascript %}
-
-.masonry( 'remove', $items )
-
-{% endhighlight %}
-
-Removes specified item elements from Masonry instance and the DOM.
-
-
 

@@ -360,6 +360,7 @@ button {
 
 .options dl.header dt,
 .options dl.header dd {
+  color: white;
   background: #444;
 }
 
