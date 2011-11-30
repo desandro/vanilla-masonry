@@ -42,22 +42,65 @@
       return elem.currentStyle;
     };
 
+  // -------------------------- Percent Margin support -------------------------- //
+
+  // hack for WebKit bug, which does not return proper values for percent-margins
+  // Hard work done by Mike Sherov https://github.com/jquery/jquery/pull/616
+
+  var body = document.getElementsByTagName("body")[0],
+      div = document.createElement('div');
+
+  div.style.marginTop = '1%';
+  body.appendChild( div );
+
+  var supportsPercentMargin = getStyle( div ).marginTop !== '1%';
+
+  body.removeChild( div );
+
+  // https://github.com/mikesherov/jquery/blob/191c9c1be/src/css.js
+
+  function hackPercentMargin( elem, computedStyle, marginValue ) {
+    if ( marginValue.indexOf('%') === -1 ) {
+      return marginValue;
+    }
+
+    var elemStyle = elem.style,
+        originalWidth = elemStyle.width,
+        ret;
+
+    // get measure by setting it on elem's width
+    elemStyle.width = marginValue;
+    ret = computedStyle.width;
+    elemStyle.width = originalWidth;
+
+    return ret;
+  }
+
   // -------------------------- getWH -------------------------- //
 
   // returns width/height of element, refactored getWH from jQuery
   function getWH( elem, measure, isOuter ) {
     // Start with offset property
-    var isWidth = measure === 'width',
+    var isWidth = measure !== 'height',
         val = isWidth ? elem.offsetWidth : elem.offsetHeight,
         dirA = isWidth ? 'Left' : 'Top',
         dirB = isWidth ? 'Right' : 'Bottom',
         computedStyle = getStyle( elem ),
         paddingA = parseFloat( computedStyle[ 'padding' + dirA ] ) || 0,
         paddingB = parseFloat( computedStyle[ 'padding' + dirB ] ) || 0,
-        marginA = parseFloat( computedStyle[ 'margin' + dirA ] ) || 0,
-        marginB = parseFloat( computedStyle[ 'margin' + dirB ] ) || 0,
         borderA = parseFloat( computedStyle[ 'border' + dirA + 'Width' ] ) || 0,
-        borderB = parseFloat( computedStyle[ 'border' + dirB + 'Width' ] ) || 0;
+        borderB = parseFloat( computedStyle[ 'border' + dirB + 'Width' ] ) || 0,
+        computedMarginA = computedStyle[ 'margin' + dirA ],
+        computedMarginB = computedStyle[ 'margin' + dirB ],
+        marginA, marginB;
+
+    if ( !supportsPercentMargin ) {
+      computedMarginA = hackPercentMargin( elem, computedStyle, computedMarginA );
+      computedMarginB = hackPercentMargin( elem, computedStyle, computedMarginB );
+    }
+
+    marginA = parseFloat( computedMarginA ) || 0;
+    marginB = parseFloat( computedMarginB ) || 0;
 
     if ( val > 0 ) {
 
@@ -115,7 +158,6 @@
       obj[ 'e' + type + fn ] = null;
     }
   }
-
 
   // -------------------------- Masonry -------------------------- //
 
