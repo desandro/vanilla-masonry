@@ -6,16 +6,13 @@ layout: default
 toc:
   - { title: Reporting bugs and issues, anchor: reporting_bugs_and_issues }
   - { title: Support license, anchor: support_license }
+  - { title: jQuery Masonry, anchor: jquery_masonry }
   - { title: Additional resources, anchor: additional_resources }
   - { title: Unloaded media and overlapping, anchor: unloaded_media_and_overlapping }
-  - { title: @font-face fonts, anchor: fontface_fonts }
-  - { title: Filtering, anchor: filtering }
-  - { title: Getting data, anchor: getting_data }
-  - { title: Other frameworks, anchor: other_frameworks }
 
 ---
 
-jQuery Masonry is a fairly popular plugin. Chances are your issue has already been encountered by someone else.
+Masonry is a fairly popular script. Chances are your issue has already been encountered by someone else.
 
 ## Reporting bugs and issues
 
@@ -32,11 +29,20 @@ The issues tracker is for bugs and issues -- when Masonry doesn't work as expect
 
 If you've tried everything and would really like to get my eyes looking at your code, you can purchase a [Support License from Metafizzy](http://metafizzy.co/#support-license).
 
+## jQuery Masonry
+
+[jQuery Masonry](http://masonry.desandro.com) is the original, more robust version of Masonry. Along with all the benefits of jQuery (easier DOM selection, document-ready function), it has several features missing from Vanilla Masonry:
+
++ jQuery animation
++ itemSelector option
++ Infinite scroll integration
++ imagesLoaded plugin
+
+Vanilla Masonry is best suited for small applications. jQuery Masonry is better suited for larger, complex applications, when jQuery is already being used.
+
 ## Additional resources
 
 + The [Metafizzy blog](http://metafizzy.co/blog/) has posts that cover specialized use cases
-+ [Sites using Masonry on Delicious](http://www.delicious.com/desandro/jquerymasonry)
-+ [Sites using Masonry on Zootool](http://zootool.com/user/desandro/tag:masonry) (has screenshots)
 + [Stack Overflow questions about Masonry](http://stackoverflow.com/search?q=masonry)
 + Other resources that are [like Masonry but not](http://www.delicious.com/desandro/likemasonrybutnot)
 
@@ -44,9 +50,19 @@ If you've tried everything and would really like to get my eyes looking at your 
 
 The number one issue that pops up is overlapping content. This is most likely due to unloaded images.
 
-### imagesLoaded plugin
+### On window load
 
-The easiest solution is to use the <a href="intro.html#imagesloaded_plugin">imagesLoaded plugin</a> as shown in the intro. This small plugin will trigger a callback after all the images in the specified content have been loaded.
+Masonry should be initialized on window load so that images are loaded first.
+
+{% highlight javascript %}
+
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container'), {
+    // options...
+  });
+};
+
+{% endhighlight %}
 
 [See Demo: Images](../demos/images.html).
 
@@ -62,74 +78,3 @@ Or you can specify the width and height of images inline.
 
 If you’re using a PHP-based CMS, you can use the [getimagesize](http://php.net/manual/en/function.getimagesize.php) function.
 
-### $(window).load()
-
-Another solution is to initialize Masonry inside `$(window).load()` instead of `$(document).ready()`. This will trigger Masonry after all the media on the page has loaded -- images, fonts, external scripts and stylesheets, etc. This method is not recommended as it can cause ugly wait times.
-
-{% highlight javascript %}
-
-$(window).load(function(){
-  $('#container').masonry({
-    // options...
-  });
-});
-
-{% endhighlight %}
-
-## @font-face fonts
-
-Both Typekit and Google WebFont Loader provide font events to control scripts based on how fonts are loaded. 
-
-+ [Typekit font events](http://blog.typekit.com/2010/10/18/more-control-with-typekits-font-events/)
-+ [Google WebFont Loader: Events](http://code.google.com/apis/webfonts/docs/webfont_loader.html#Events)
-
-### Typekit
-
-Try the script below when using Masonry on a page with Typekit. This will trigger Masonry when the document is ready and again when fonts have loaded. Be sure to remove Typekit's default script,  `try{Typekit.load();}catch(e){}`.
-
-{% highlight javascript %}
-
-var $container;
-
-function triggerMasonry() {
-  // don't proceed if $container has not selected
-  if ( !$container ) {
-    return
-  }
-  $container.masonry({
-    // options...
-  });
-}
-
-$(function(){
-  $container = $('#container');
-  // trigger masonry on doc ready
-  triggerMasonry();
-});
-
-// trigger masonry when fonts have loaded
-Typekit.load({
-  active: triggerMasonry,
-  inactive: triggerMasonry
-});
-
-{% endhighlight %}
-
-## Filtering
-
-Filtering with Masonry is officially unsupported as of v2.0. Use [Isotope](http://isotope.metafizzy.co) instead. Isotope shares a majority Masonry's features. It also has additional powerful features like filtering and sorting built right in, so you probably won't be missing any functionality.
-
-## Getting data
-
-You can access all the options and properties in a Masonry instance using the `.data()` method with the namespace `'masonry'`.
-
-{% highlight javascript %}
-
-$('#container').data('masonry');
-
-{% endhighlight %}
-
-## Other frameworks
-
-+ [mooMasonry for MooTools](http://mootools.net/forge/p/moomasonry)
-+ [Prototype Masonry for Prototype JS](http://www.sthoughts.com/prototype-masonry/)
