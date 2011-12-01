@@ -2,18 +2,15 @@
 
 error handling
 
-acknowledgments
+what happens when no container
+what happens when no items
 
 ## document
-
-getFluidColumnWidth: function( containerWidth ) {
-  return ( containerWidth - 20 ) / 5
-}
-
-build method
 
 ## back port to jQuery Masonry
 
 add + this.options.gutterWidth when determining column span
 
 use offset when setting position, not right off the bat, should be 0 at first
+
+remove _placeBrick, merge into loop
