@@ -120,15 +120,16 @@ This project lives on GitHub at [github.com/desandro/vanilla-masonry](http://git
 
 My thanks go out to following developers, whose work was integral in making Masonry lightweight and cross-browser compatible.
 
-+ **John Resig** for cross-browser addEvent, removeEvent functions
-+ [**Dustin Diaz**](http://dustindiaz.com/) for add/remove class function in bonzo
-+ **The jQuery team** for the `getWH` helper function within jQuery
-+ **John Hann** for debouncing
++ [**Dustin Diaz**](http://dustindiaz.com/) for add/remove class function in [bonzo](https://github.com/ded/bonzo)
++ [**The jQuery team**](http://jquery.org/team/) for the `getWH` helper function within jQuery
++ **John Hann** for [debouncing methods](http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/)
++ **John Resig** for [cross-browser addEvent & removeEvent functions](http://ejohn.org/projects/flexible-javascript-events/)
++ **Mike Sherov** for his fix to resolve [measuring percent margins in WebKit](https://github.com/jquery/jquery/pull/616)
 
 ## Changelog
 
 <dl>
-  <dt>v1.0: Nov 2011</dt>
+  <dt>v1.0: Dec 2011</dt>
     <dd>Original release</dd>
 </dl>
 
