@@ -16,13 +16,11 @@ layout: default
 
 {% highlight javascript %}
 
-var $tumblelog = $('#tumblelog');
-
-$tumblelog.imagesLoaded( function(){
-  $tumblelog.masonry({
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('tumblelog'), {
     columnWidth: 240
   });
-});
+};
 
 {% endhighlight %}
 
@@ -208,7 +206,7 @@ $tumblelog.imagesLoaded( function(){
 <script src="../{{ site.masonry_js }}"></script>
 <script>
   window.onload = function() {
-    var facade = new Masonry( document.getElementById('tumblelog'), {
+    var wall = new Masonry( document.getElementById('tumblelog'), {
       columnWidth: 240
     });
   };

@@ -15,16 +15,14 @@ photos:
 ---
 
 <section id="copy">
-  <p>Masonry is triggered after all images are loaded with the imagesLoaded plugin</a>. </p>
+  <p>Masonry is triggered after all images are loaded on <code>window</code> load</a>. </p>
   
 {% highlight javascript %}
-var $container = $('#container');
 
-$container.imagesLoaded( function(){
-  $container.masonry({
-    itemSelector : '.box'
-  });
-});
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container') );
+};
+
 {% endhighlight %}
 </section>
 

@@ -188,13 +188,11 @@ layout: default
 
 <script src="../{{ site.masonry_js }}"></script>
 <script>
-  $(function(){
-    
-      $('#container').masonry({
-        itemSelector: '.foo'
-      }).css({ background: 'black' });
-      
-      $('body').css({ background: 'white' });
-    
+
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container'), {
+    columnWidth: 240
   });
+};
+
 </script>

@@ -9,10 +9,11 @@ layout: default
   
 {% highlight javascript %}
 
-$('#container').masonry({
-  itemSelector: '.box',
-  columnWidth: 100
-});
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container'), {
+    columnWidth: 100
+  });
+};
 
 {% endhighlight %}
 </div>
@@ -198,7 +199,7 @@ $('#container').masonry({
 <script src="../{{ site.masonry_js }}"></script>
 <script>
   window.onload = function() {
-    var facade = new Masonry( document.getElementById('container'), {
+    var wall = new Masonry( document.getElementById('container'), {
       columnWidth: 100
     });
   };

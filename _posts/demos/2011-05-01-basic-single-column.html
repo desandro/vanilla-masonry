@@ -9,9 +9,9 @@ layout: default
 <div id="copy">
 {% highlight javascript %}
 
-$('#container').masonry({
-  itemSelector: '.box'
-});
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container') );
+};
 
 {% endhighlight %}
 </div>
@@ -194,6 +194,6 @@ $('#container').masonry({
 <script src="../{{ site.masonry_js }}"></script>
 <script>
   window.onload = function() {
-    var facade = new Masonry( document.getElementById('container') );
+    var wall = new Masonry( document.getElementById('container') );
   };
 </script>
