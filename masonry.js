@@ -1,6 +1,7 @@
 /**
  * Vanilla Masonry v1.0 beta
  * A dynamic layout plugin. The flip-side of CSS Floats
+ * http://vanilla-masonry.desandro.com
  *
  * Licensed under the MIT license.
  * Copyright 2011 David DeSandro
