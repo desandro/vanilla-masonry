@@ -9,6 +9,7 @@ toc:
   - { title: jQuery Masonry, anchor: jquery_masonry }
   - { title: Additional resources, anchor: additional_resources }
   - { title: Unloaded media and overlapping, anchor: unloaded_media_and_overlapping }
+  - { title: DOM ready, anchor: dom_ready }
 
 ---
 
@@ -38,7 +39,7 @@ If you've tried everything and would really like to get my eyes looking at your 
 + Infinite scroll integration
 + imagesLoaded plugin
 
-Vanilla Masonry is best suited for small applications. jQuery Masonry is better suited for larger, complex applications, when jQuery is already being used.
+Vanilla Masonry has the advantage of being lightweight, without any frame dependency, best suited for small applications. jQuery Masonry is better suited for larger, complex applications, when jQuery is already being used.
 
 ## Additional resources
 
@@ -78,3 +79,30 @@ Or you can specify the width and height of images inline.
 
 If you’re using a PHP-based CMS, you can use the [getimagesize](http://php.net/manual/en/function.getimagesize.php) function.
 
+## DOM ready
+
+Instead of initializing Masonry with `window.onload`, you use a DOM ready script to kick things as soon as possible.
+
++ [DOMReady by Mark McDonnell](https://github.com/Integralist/DOMready)
++ [domready by Dustin Diaz](https://github.com/ded/domready)
++ See also [Paul Irish's lazyweb request for a DOMContentLoaded shim](https://github.com/paulirish/lazyweb-requests/issues/27)
+
+For example, with [DOMReady](https://github.com/Integralist/DOMready):
+
+{% highlight javascript %}
+
+DOMready( function() {
+  var wall = new Masonry( document.getElementById('container'), { /* options * / });
+});
+
+{% endhighlight %}
+
+If you are targeting just modern browsers that support `DOMContentLoaded`:
+
+{% highlight javascript %}
+
+window.addEventListener( 'DOMContentLoaded', function() {
+  var wall = new Masonry( document.getElementById('container'), { /* options */ });
+}, false );
+
+{% endhighlight %}
