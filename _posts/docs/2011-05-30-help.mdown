@@ -92,7 +92,7 @@ For example, with [DOMReady](https://github.com/Integralist/DOMready):
 {% highlight javascript %}
 
 DOMready( function() {
-  var wall = new Masonry( document.getElementById('container'), { /* options * / });
+  var wall = new Masonry( element, options );
 });
 
 {% endhighlight %}
@@ -102,7 +102,7 @@ If you are targeting just modern browsers that support `DOMContentLoaded`:
 {% highlight javascript %}
 
 window.addEventListener( 'DOMContentLoaded', function() {
-  var wall = new Masonry( document.getElementById('container'), { /* options */ });
+  var wall = new Masonry( element, options );
 }, false );
 
 {% endhighlight %}

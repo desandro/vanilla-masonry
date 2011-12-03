@@ -13,17 +13,20 @@ toc :
 
 ---
 
-Options are set with an object as the second argument to the `Masonry` constructor. All options are optional.
+Options are set with an object as the second argument to the `Masonry` constructor. All options are optional, and do not need to be set.
 
 {% highlight javascript %}
 
 window.onload = function() {
+  // initialize Masonry instance
   var wall = new Masonry( document.getElementById('container'), {
     // options...
     columnWidth: 240,
     gutterWidth: 20,
     isFitWidth: true
   });
+  // change an option after initialization
+  wall.options.columnWidth = 200;
 };
 
 {% endhighlight %}

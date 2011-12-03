@@ -1,15 +1,6 @@
 ## To do 
 
-README
-
-spellcheck
-
 github pages
-
-error handling
-
-what happens when no container
-what happens when no items
 
 ## document
 
