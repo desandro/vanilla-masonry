@@ -1,5 +1,5 @@
 name: Vanilla Masonry
 permalink: /:categories/:title.html
 pygments: true
-masonry_js: masonry.js
+masonry_js: masonry.min.js
 exclude: [ minify.sh, deploy.sh, notes.mdown ]

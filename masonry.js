@@ -1,5 +1,5 @@
 /**
- * Vanilla Masonry v1.0 beta
+ * Vanilla Masonry v1.0
  * A dynamic layout plugin. The flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
