@@ -1,6 +1,6 @@
 /**
  * Vanilla Masonry v1.0
- * A dynamic layout plugin. The flip-side of CSS Floats
+ * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
  * Licensed under the MIT license.
@@ -131,8 +131,6 @@
 
     return val;
   }
-
-  window.getWH = getWH;
 
   // -------------------------- addEvent / removeEvent -------------------------- //
 
@@ -477,6 +475,9 @@
 
   };
 
+  // add utility function
+  Masonry.getWH = getWH;
+  // add Masonry to global namespace
   window.Masonry = Masonry;
 
 })( window );

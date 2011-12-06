@@ -11,3 +11,5 @@ add + this.options.gutterWidth when determining column span
 use offset when setting position, not right off the bat, should be 0 at first
 
 remove _placeBrick, merge into loop
+
+just get paddingLeft / Right for offset X
