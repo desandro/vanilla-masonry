@@ -15,19 +15,33 @@
 
   // from bonzo.js, by Dustin Diaz - https://github.com/ded/bonzo
 
+  // use classList if supported because it's way faster: http://jsperf.com/classlist-vs-bonzo - by <@calvein>
+  var supportClassList = (function() {
+    var div = document.createElement('div');
+    return 'classList' in div;
+  })();
+
   function classReg(c) {
     return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
   }
 
-  function hasClass(el, c) {
-    return classReg(c).test(el.className);
+  var hasClass = supportClassList ? function (el, c) {
+    return el.classList.contains(c)
+  } : function (el, c) {
+    return classReg(c).test(el.className)
   }
-  function addClass(el, c) {
+
+  var addClass = supportClassList ? function (el, c) {
+    el.classList.add(c)
+  } : function (el, c) {
     if ( !hasClass(el, c) ) {
       el.className = el.className + ' ' + c;
     }
   }
-  function removeClass(el, c) {
+
+  var removeClass = supportClassList ? function (el, c) {
+    el.classList.remove(c)
+  } : function (el, c) {
     el.className = el.className.replace(classReg(c), ' ');
   }
 
