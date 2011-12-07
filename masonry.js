@@ -15,20 +15,34 @@
 
   // from bonzo.js, by Dustin Diaz - https://github.com/ded/bonzo
 
+  // use classList if supported because it's way faster: http://jsperf.com/classlist-vs-bonzo - by <@calvein>
+  var supportClassList = (function() {
+    var div = document.createElement('div');
+    return 'classList' in div;
+  })();
+
   function classReg(c) {
     return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
   }
 
   function hasClass(el, c) {
-    return classReg(c).test(el.className);
+    return supportClassList ? el.classList.contains(c) : classReg(c).test(el.className);
   }
   function addClass(el, c) {
-    if ( !hasClass(el, c) ) {
-      el.className = el.className + ' ' + c;
+    if ( supportClassList ) {
+      el.classList.add(c);
+    } else {
+      if ( !hasClass(el, c) ) {
+        el.className = el.className + ' ' + c;
+      }
     }
   }
   function removeClass(el, c) {
-    el.className = el.className.replace(classReg(c), ' ');
+    if ( supportClassList ) {
+      el.classList.remove(c);
+    } else {
+      el.className = el.className.replace(classReg(c), ' ');
+    }
   }
 
   // -------------------------- getStyle -------------------------- //
