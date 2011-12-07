@@ -25,24 +25,24 @@
     return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
   }
 
-  function hasClass(el, c) {
-    return supportClassList ? el.classList.contains(c) : classReg(c).test(el.className);
+  var hasClass = supportClassList ? function (el, c) {
+    return el.classList.contains(c)
+  } : function (el, c) {
+    return classReg(c).test(el.className)
   }
-  function addClass(el, c) {
-    if ( supportClassList ) {
-      el.classList.add(c);
-    } else {
-      if ( !hasClass(el, c) ) {
-        el.className = el.className + ' ' + c;
-      }
+
+  var addClass = supportClassList ? function (el, c) {
+    el.classList.add(c)
+  } : function (el, c) {
+    if ( !hasClass(el, c) ) {
+      el.className = el.className + ' ' + c;
     }
   }
-  function removeClass(el, c) {
-    if ( supportClassList ) {
-      el.classList.remove(c);
-    } else {
-      el.className = el.className.replace(classReg(c), ' ');
-    }
+
+  var removeClass = supportClassList ? function (el, c) {
+    el.classList.remove(c)
+  } : function (el, c) {
+    el.className = el.className.replace(classReg(c), ' ');
   }
 
   // -------------------------- getStyle -------------------------- //
