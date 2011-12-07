@@ -1,5 +1,5 @@
 /**
- * Vanilla Masonry v1.0
+ * Vanilla Masonry v1.0.01
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
@@ -11,25 +11,38 @@
 
   'use strict';
 
+  var document = window.document;
+
   // -------------------------- DOM Utility -------------------------- //
 
   // from bonzo.js, by Dustin Diaz - https://github.com/ded/bonzo
+
+  // use classList API if available
+  var supportClassList = !!( 'classList' in document.createElement('div') );
 
   function classReg(c) {
     return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
   }
 
-  function hasClass(el, c) {
+  var hasClass = supportClassList ? function (el, c) {
+    return el.classList.contains(c);
+  } : function (el, c) {
     return classReg(c).test(el.className);
-  }
-  function addClass(el, c) {
+  };
+
+  var addClass = supportClassList ? function (el, c) {
+    el.classList.add(c);
+  } : function (el, c) {
     if ( !hasClass(el, c) ) {
       el.className = el.className + ' ' + c;
     }
-  }
-  function removeClass(el, c) {
+  };
+
+  var removeClass = supportClassList ? function (el, c) {
+    el.classList.remove(c);
+  } : function (el, c) {
     el.className = el.className.replace(classReg(c), ' ');
-  }
+  };
 
   // -------------------------- getStyle -------------------------- //
 
