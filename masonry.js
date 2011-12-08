@@ -1,5 +1,5 @@
 /**
- * Vanilla Masonry v1.0.01
+ * Vanilla Masonry v1.0.02
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
@@ -18,7 +18,7 @@
   // from bonzo.js, by Dustin Diaz - https://github.com/ded/bonzo
 
   // use classList API if available
-  var supportClassList = !!( 'classList' in document.createElement('div') );
+  var supportClassList = 'classList' in document.createElement('div');
 
   function classReg(c) {
     return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
