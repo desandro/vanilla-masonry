@@ -23,7 +23,7 @@ Masonry is a fairly popular script. Chances are your issue has already been enco
 + Look over open and closed issues before submitting yours.
 + Add a link to a live site with the bug. If the project is confidential, try re-creating it in [jsFiddle](http://jsfiddle.net).
 
-The issues tracker is for bugs and issues -- when Masonry doesn't work as expected. It is not for implementation issues -- when you are having trouble setting up Masonry.
+The issues tracker is for bugs and issues -- when Masonry doesn't work as expected. It is not for implementation issues -- when you are having trouble setting up Masonry. I am unable to personally help with implementation issues but [don't give up](http://metafizzy.co/blog/frustrated-stuck-tired-defeated/)!
 
 ## jQuery Masonry
 
