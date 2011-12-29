@@ -13,7 +13,7 @@ toc :
 
 ---
 
-Options are set with an object as the second argument to the `Masonry` constructor. All options are optional, and do not need to be set.
+Options are set with an object as the second argument to the `Masonry` constructor. All options are optional, and do not need to be set, but [`columnWidth`](#columnwidth) is recommended.
 
 {% highlight javascript %}
 
