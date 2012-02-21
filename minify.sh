@@ -3,13 +3,15 @@
 # minifies masonry.js
 # requires nodejs & uglifyjs
 
-JS=masonry.js
-JS_MIN=masonry.min.js
+IN=masonry.js
+OUT=masonry.min.js
 
-# minify with UglifyJS
+# remove any lines that begin with /*jshint or /*global
+# then, minify with Uglify JS
 # then, add newline characters after `*/`, but not last newline character
-uglifyjs $JS \
-  | awk '{ORS=""; gsub(/\*\//,"*/\n"); if (NR!=1) print "\n"; print;}' > $JS_MIN
+awk '!/^\/\*[jshint|global]/' $IN \
+  | uglifyjs \
+  | awk '{ORS=""; gsub(/\*\//,"*/\n"); if (NR!=1) print "\n"; print;}' > $OUT
 # add trailing semicolon
-echo ';' >> $JS_MIN
-echo "Minified" $JS "as" $JS_MIN
+echo ';' >> $OUT
+echo "Minified" $IN "as" $OUT

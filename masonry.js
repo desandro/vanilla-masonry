@@ -1,15 +1,15 @@
 /**
- * Vanilla Masonry v1.0.02
+ * Vanilla Masonry v1.0.03
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
  * Licensed under the MIT license.
- * Copyright 2011 David DeSandro
+ * Copyright 2012 David DeSandro
  */
 
-(function( window, undefined ) {
+/*jshint forin: false, undef: true, eqeqeq: true, curly: true, browser: true */
 
-  'use strict';
+(function( window, undefined ) {
 
   var document = window.document;
 
