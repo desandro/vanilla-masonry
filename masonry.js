@@ -1,5 +1,5 @@
 /**
- * Vanilla Masonry v1.0.03
+ * Vanilla Masonry v1.0.04
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
@@ -323,8 +323,7 @@
         }
 
         //how many columns does this brick span
-        colSpan = Math.ceil( getWH( brick, 'width', true ) /
-          ( this.columnWidth + this.options.gutterWidth ) );
+        colSpan = Math.ceil( getWH( brick, 'width', true ) / this.columnWidth );
         colSpan = Math.min( colSpan, this.cols );
 
         if ( colSpan === 1 ) {
