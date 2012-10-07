@@ -62,14 +62,17 @@
   // Hard work done by Mike Sherov https://github.com/jquery/jquery/pull/616
 
   var body = document.getElementsByTagName("body")[0],
-      div = document.createElement('div');
+      div = document.createElement('div'),
+      fakeBody = body || document.createElement('body');
 
   div.style.marginTop = '1%';
-  body.appendChild( div );
+  fakeBody.appendChild( div );
 
   var supportsPercentMargin = getStyle( div ).marginTop !== '1%';
 
-  body.removeChild( div );
+  fakeBody.removeChild( div );
+
+  // TODO remove fakebody if it's fake?
 
   // https://github.com/mikesherov/jquery/blob/191c9c1be/src/css.js
 
