@@ -1,5 +1,5 @@
 /**
- * Vanilla Masonry v1.0.04
+ * Vanilla Masonry v1.0.5
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
@@ -7,9 +7,11 @@
  * Copyright 2012 David DeSandro
  */
 
-/*jshint forin: false, undef: true, eqeqeq: true, curly: true, browser: true */
+/*jshint forin: false, undef: true, eqeqeq: true, curly: true, browser: true, strict: true */
 
 (function( window, undefined ) {
+
+  'use strict';
 
   var document = window.document;
 
@@ -62,14 +64,17 @@
   // Hard work done by Mike Sherov https://github.com/jquery/jquery/pull/616
 
   var body = document.getElementsByTagName("body")[0],
-      div = document.createElement('div');
+      div = document.createElement('div'),
+      fakeBody = body || document.createElement('body');
 
   div.style.marginTop = '1%';
-  body.appendChild( div );
+  fakeBody.appendChild( div );
 
   var supportsPercentMargin = getStyle( div ).marginTop !== '1%';
 
-  body.removeChild( div );
+  fakeBody.removeChild( div );
+
+  // TODO remove fakebody if it's fake?
 
   // https://github.com/mikesherov/jquery/blob/191c9c1be/src/css.js
 
@@ -130,7 +135,7 @@
 
       // Fall back to computed then uncomputed css if necessary
       val = computedStyle[ measure ];
-      if ( val < 0 || val == null ) {
+      if ( val < 0 || val === null ) {
         val = elem.style[ measure ] || 0;
       }
       // Normalize "", auto, and prepare for extra
