@@ -1,5 +1,5 @@
 /**
- * Vanilla Masonry v1.0.04
+ * Vanilla Masonry v1.0.5
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
@@ -7,9 +7,11 @@
  * Copyright 2012 David DeSandro
  */
 
-/*jshint forin: false, undef: true, eqeqeq: true, curly: true, browser: true */
+/*jshint forin: false, undef: true, eqeqeq: true, curly: true, browser: true, strict: true */
 
 (function( window, undefined ) {
+
+  'use strict';
 
   var document = window.document;
 
@@ -133,7 +135,7 @@
 
       // Fall back to computed then uncomputed css if necessary
       val = computedStyle[ measure ];
-      if ( val < 0 || val == null ) {
+      if ( val < 0 || val === null ) {
         val = elem.style[ measure ] || 0;
       }
       // Normalize "", auto, and prepare for extra
