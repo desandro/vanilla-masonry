@@ -1,0 +1,15 @@
+{
+  "name": "vanilla-masonry",
+  "description": "Masonry layouts without any frameworks",
+  "version": "1.0.04",
+  "main": [
+    "masonry.js", 
+    "masonry-transitions.css"
+  ],
+  "scripts": [
+    "masonry.js"
+  ],
+  "styles": [
+    "masonry-transitions.css"
+  ]
+}
