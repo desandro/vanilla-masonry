@@ -7,8 +7,6 @@
  * Copyright 2012 David DeSandro
  */
 
-/*jshint forin: false, undef: true, eqeqeq: true, curly: true, browser: true, strict: true */
-
 (function( window, undefined ) {
 
   'use strict';
