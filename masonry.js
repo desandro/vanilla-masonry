@@ -1,5 +1,5 @@
 /**
- * Vanilla Masonry v1.0.5
+ * Vanilla Masonry v1.0.6
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
@@ -315,6 +315,11 @@
     // used on collection of atoms (should be filtered, and sorted before )
     // accepts bricks-to-be-laid-out to start with
     layout: function( bricks, callback ) {
+
+      // bail out if no bricks
+      if ( !bricks || !bricks.length ) {
+        return;
+      }
 
       // layout logic
       var brick, colSpan, groupCount, groupY, groupColY, j, colGroup;
