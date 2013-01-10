@@ -3,6 +3,9 @@
   "version": "1.0.6",
   "description": "Layout elements to a grid, like a mason fitting stones in a wall",
   "main": "masonry.js",
+  "scripts": [
+    "masonry.js"
+  ],
   "dependencies": {
   }
 }

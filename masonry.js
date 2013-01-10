@@ -497,7 +497,12 @@
 
   // add utility function
   Masonry.getWH = getWH;
-  // add Masonry to global namespace
-  window.Masonry = Masonry;
 
+  // expose Masonry
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Masonry
+  } else {
+    // add Masonry to global namespace
+    window.Masonry = Masonry;
+  }
 })( window );
