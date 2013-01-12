@@ -4,5 +4,9 @@
   "description": "Layout elements to a grid, like a mason fitting stones in a wall",
   "main": "masonry.js",
   "dependencies": {
-  }
+    "component/classes": "*"
+  },
+  "scripts": [
+    "masonry.js"
+  ]
 }
