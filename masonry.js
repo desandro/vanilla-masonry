@@ -7,42 +7,13 @@
  * Copyright 2012 David DeSandro
  */
 
+var classes = require('classes')
+
 (function( window, undefined ) {
 
   'use strict';
 
   var document = window.document;
-
-  // -------------------------- DOM Utility -------------------------- //
-
-  // from bonzo.js, by Dustin Diaz - https://github.com/ded/bonzo
-
-  // use classList API if available
-  var supportClassList = 'classList' in document.createElement('div');
-
-  function classReg(c) {
-    return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
-  }
-
-  var hasClass = supportClassList ? function (el, c) {
-    return el.classList.contains(c);
-  } : function (el, c) {
-    return classReg(c).test(el.className);
-  };
-
-  var addClass = supportClassList ? function (el, c) {
-    el.classList.add(c);
-  } : function (el, c) {
-    if ( !hasClass(el, c) ) {
-      el.className = el.className + ' ' + c;
-    }
-  };
-
-  var removeClass = supportClassList ? function (el, c) {
-    el.classList.remove(c);
-  } : function (el, c) {
-    el.className = el.className.replace(classReg(c), ' ');
-  };
 
   // -------------------------- getStyle -------------------------- //
 
@@ -215,7 +186,7 @@
       for (var i=0, len = items.length; i < len; i++ ) {
         item = items[i];
         item.style.position = 'absolute';
-        addClass( item, 'masonry-brick' );
+        classes( item ).add( 'masonry-brick' );
         this.bricks.push( item );
       }
     },
@@ -250,7 +221,7 @@
       // add masonry class first time around
       var instance = this;
       setTimeout( function() {
-        addClass( instance.element, 'masonry' );
+        classes( instance.element ).add( 'masonry ');
       });
 
       // bind resize method
@@ -474,7 +445,7 @@
         brick.style.position = '';
         brick.style.top = '';
         brick.style.left = '';
-        removeClass( brick, 'masonry-brick' );
+        classes( brick ).remove( 'masonry-brick' );
       }
 
       // re-apply saved container styles
@@ -485,7 +456,7 @@
         elemStyle[ prop ] = this._originalStyle[ prop ];
       }
 
-      removeClass( this.element, 'masonry' );
+      classes( this.element ).remove( 'masonry' );
 
       if ( this.resizeHandler ) {
         removeEvent( window, 'resize', this.resizeHandler );
