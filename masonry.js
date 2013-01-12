@@ -7,9 +7,11 @@
  * Copyright 2012 David DeSandro
  */
 
+module.exports = Masonry
+
 var classes = require('classes');
 
-(function( window, undefined ) {
+//(function( window, undefined ) {
 
   'use strict';
 
@@ -469,6 +471,6 @@ var classes = require('classes');
   // add utility function
   Masonry.getWH = getWH;
   // add Masonry to global namespace
-  window.Masonry = Masonry;
+  //window.Masonry = Masonry;
 
-})( window );
+//})( window );
