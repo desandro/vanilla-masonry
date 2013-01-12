@@ -7,7 +7,7 @@
  * Copyright 2012 David DeSandro
  */
 
-var classes = require('classes')
+var classes = require('classes');
 
 (function( window, undefined ) {
 
