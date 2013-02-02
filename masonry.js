@@ -1,13 +1,11 @@
 /**
- * Vanilla Masonry v1.0.5
+ * Vanilla Masonry v1.0.7
  * Dynamic layouts for the flip-side of CSS Floats
  * http://vanilla-masonry.desandro.com
  *
  * Licensed under the MIT license.
  * Copyright 2012 David DeSandro
  */
-
-/*jshint forin: false, undef: true, eqeqeq: true, curly: true, browser: true, strict: true */
 
 (function( window, undefined ) {
 
@@ -315,6 +313,11 @@
     // used on collection of atoms (should be filtered, and sorted before )
     // accepts bricks-to-be-laid-out to start with
     layout: function( bricks, callback ) {
+
+      // bail out if no bricks
+      if ( !bricks || !bricks.length ) {
+        return;
+      }
 
       // layout logic
       var brick, colSpan, groupCount, groupY, groupColY, j, colGroup;
