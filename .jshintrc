@@ -1,6 +1,7 @@
 {
   "browser": true,
   "curly": true,
+  "strict": true,
   "undef": true,
-  "strict": true
+  "unused": true
 }
