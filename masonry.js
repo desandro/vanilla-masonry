@@ -320,7 +320,7 @@
       }
 
       // layout logic
-      var brick, colSpan, groupCount, groupY, groupColY, j, colGroup;
+      var brick, colSpan, groupCount, groupColY, j, colGroup;
 
       for ( var i=0, len = bricks.length; i < len; i++ ) {
         brick = bricks[i];
@@ -377,7 +377,6 @@
       }
 
       // set the size of the container
-      var containerWidth = {};
       this.element.style.height = Math.max.apply( Math, this.colYs ) + 'px';
       if ( this.options.isFitWidth ) {
         var unusedCols = 0;
