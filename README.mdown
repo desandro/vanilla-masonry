@@ -1,6 +1,10 @@
 Vanilla Masonry
 ===============
 
+This project is now **deprecated**. [Masonry v3](http://masonry.desandro.com) supports vanilla JS, without requiring jQuery. Use it!
+
+---
+
 Masonry is a dynamic grid layout script. Think of it as the flip-side of CSS floats. Whereas floating arranges elements horizontally then vertically, Masonry arranges elements vertically, positioning each element in the next open spot in the grid. The result minimizes vertical gaps between elements of varying height, just like a mason fitting stones in a wall.
 
 You might have heard of [jQuery Masonry](http://masonry.desandro.com), this is the framework-free version.
